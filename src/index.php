@@ -16,7 +16,7 @@
 			
 			include 'database.php';
 			
-			$dir    = 'uploads/';
+			$dir    = getenv('LANGUAGE_UPLOADS').'/';
 			$files1 = scandir($dir);
 			
 			/*
@@ -34,7 +34,7 @@
 				echo '<div class="mediabox">';
 				echo '<a href="media.php?id='.$row[0].'">'.$row[1].'</a>';
 				echo '<br />';
-				echo '<a href="media.php?id='.$row[0].'"><img height="200" src="thumbnails/'.$row[0].'.png"></a>';
+				echo '<a href="media.php?id='.$row[0].'"><img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$row[0].'.png"></a>';
 				echo '</div>';
 			}
 			

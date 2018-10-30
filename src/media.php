@@ -21,18 +21,18 @@
 				#ffmpeg -i video.avi -vf subtitles=subtitle.srt out.avi
 				
 				
-				if (!file_exists('renders/'.$_GET['id'])) {
-					mkdir('renders/'.$_GET['id']);
+				if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'])) {
+					mkdir(getenv('LANGUAGE_RENDERS').'/'.$_GET['id']);
 				}
 				
-				chmod('renders/'.$_GET['id'], 0777);
+				chmod(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'], 0777);
 				
 				$render_number = 0;
 				$number_found = 0;
 				
-				if (!file_exists('renders/'.$_GET['id'].'/'.$media[1])) {
+				if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1])) {
 				
-					exec('/home/dave/Downloads/ffmpeg -i uploads/'.$media[1].' -vf subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' renders/'.$_GET['id'].'/'.$media[1]);
+					exec('/home/dave/Downloads/ffmpeg -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -vf subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1]);
 					
 				} else {
 					while ($number_found == 0) {
@@ -41,7 +41,7 @@
 							$number_found = 1;
 						}
 					}
-					exec('/home/dave/Downloads/ffmpeg -i uploads/'.$media[1].' -vf subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' renders/'.$_GET['id'].'/'.$render_number.'_'.$media[1]);
+					exec('/home/dave/Downloads/ffmpeg -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -vf subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1]);
 				}
 				
 				#exec('ffmpeg -i uploads/'.$media[1].' -filter:v subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' -c:a copy -c:v libx264 -crf 22 -preset veryfast renders/'.$_GET['id'].'/'.$media[1]);
@@ -61,7 +61,7 @@
 			echo '<br /><br />';
 
 			echo '<video width="512" height="512" controls>';
-  			echo '<source src="uploads/'.$media[1].'" type="video/mp4">';
+  			echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$media[1].'" type="video/mp4">';
 			echo '</video>'; 
 
 			
@@ -94,14 +94,14 @@
 			echo '</form>';
 			echo '<br /><br />';
 			
-			if (file_exists('renders/'.$_GET['id'])) {
+			if (file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'])) {
 			
 				echo '<strong>Renders</strong><br />';
 			
-				$files = scandir('renders/'.$_GET['id']);
+				$files = scandir(getenv('LANGUAGE_RENDERS').'/'.$_GET['id']);
 				foreach($files as $file) {
 					if (($file != '.') && ($file != '..')) {
-						echo '<a href="renders/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
+						echo '<a href="'.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
 					}
 				}
 			}
