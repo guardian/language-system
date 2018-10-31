@@ -1,12 +1,12 @@
 <?php
 include 'database.php';
-$target_dir = "subtitles/".$_GET['id']."/";
+$target_dir = getenv('LANGUAGE_SUBTITLES')."/".$_GET['id']."/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
-mkdir('subtitles/'.$_GET['id']);
-chmod('subtitles/'.$_GET['id'], 0777);
+mkdir(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id']);
+chmod(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'], 0777);
 
 // Check if file already exists
 if (file_exists($target_file)) {

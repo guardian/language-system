@@ -30,7 +30,7 @@ if ($uploadOk == 0) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         mysql_query("INSERT INTO files (filename) VALUES ('".$_FILES["fileToUpload"]["name"]."')");
         $lastid = mysql_insert_id();
-        exec('/home/dave/Downloads/ffmpeg -i uploads/'.$_FILES["fileToUpload"]["name"].' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 thumbnails/'.$lastid.'.png');
+        exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$_FILES["fileToUpload"]["name"].' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');
         
         
     } else {

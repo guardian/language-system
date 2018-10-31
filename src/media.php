@@ -32,7 +32,7 @@
 				
 				if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1])) {
 				
-					exec('/home/dave/Downloads/ffmpeg -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -vf subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1]);
+					exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -vf subtitles='.getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$_POST['subtitles'].' '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1]);
 					
 				} else {
 					while ($number_found == 0) {
@@ -41,7 +41,7 @@
 							$number_found = 1;
 						}
 					}
-					exec('/home/dave/Downloads/ffmpeg -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -vf subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1]);
+					exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -vf subtitles='.getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$_POST['subtitles'].' '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1]);
 				}
 				
 				#exec('ffmpeg -i uploads/'.$media[1].' -filter:v subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' -c:a copy -c:v libx264 -crf 22 -preset veryfast renders/'.$_GET['id'].'/'.$media[1]);
