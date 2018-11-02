@@ -68,7 +68,7 @@
 
 			echo '<br /><br />';
 			
-			
+			echo '<strong>Subtitle Upload</strong><br />';
 			echo '<form action="uploadsubtitles.php?id='.$_GET['id'].'" method="post" enctype="multipart/form-data">';
     		?>Select subtitles to upload:
     			<input type="file" name="fileToUpload" id="fileToUpload">
@@ -76,7 +76,7 @@
 			</form>
 			<?php
 			echo '<br /><br />';
-		
+			echo '<strong>Rendering</strong><br />';
 			echo '<form action="media.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="subtitles">';
 			$dir    = 'subtitles/'.$_GET['id'];
@@ -105,7 +105,79 @@
 					}
 				}
 			}
-
+			echo '<br /><br />';
+			
+			echo '<strong>Machine Translation</strong><br />';
+		
+			echo '<form action="translate.php?id='.$_GET['id'].'" method="POST">';
+			echo '<select name="subtitles">';
+			$dir    = 'subtitles/'.$_GET['id'];
+			$files1 = scandir($dir);
+			
+			foreach ($files1 as $file) {
+				if (($file != '.') && ($file != '..')) {
+					echo '<option value="'.$file.'">'.$file.'</option>';
+				}
+			
+			}
+			echo '</select>';
+			echo ' Source: <select name="source">';
+			echo '<option value="en">English</option>';
+			echo '<option value="ar">Arabic</option>';
+			echo '<option value="zh-CN">Chinese (Simplified)</option>';
+			echo '<option value="zh-TW">Chinese (Traditional)</option>';
+			echo '<option value="da">Danish</option>';
+			echo '<option value="nl">Dutch</option>';
+			echo '<option value="fr">French</option>';
+			echo '<option value="de">German</option>';
+			echo '<option value="el">Greek</option>';
+			echo '<option value="gu">Gujarati</option>';
+			echo '<option value="hi">Hindi</option>';
+			echo '<option value="it">Italian</option>';
+			echo '<option value="ko">Korean</option>';
+			echo '<option value="fa">Persian</option>';
+			echo '<option value="pl">Polish</option>';
+			echo '<option value="pt">Portuguese</option>';
+			echo '<option value="pa">Punjabi</option>';
+			echo '<option value="ru">Russian</option>';
+			echo '<option value="ja">Japanese</option>';
+			echo '<option value="es">Spanish</option>';
+			echo '<option value="sw">Swahili</option>';
+			echo '<option value="sv">Swedish</option>';
+			echo '<option value="tr">Turkish</option>';
+			echo '<option value="ur">Urdu</option>';
+			echo '</select>';
+			
+			echo ' Target: <select name="target">';
+			echo '<option value="ar">Arabic</option>';
+			echo '<option value="zh-CN">Chinese (Simplified)</option>';
+			echo '<option value="zh-TW">Chinese (Traditional)</option>';
+			echo '<option value="da">Danish</option>';
+			echo '<option value="nl">Dutch</option>';
+			echo '<option value="en">English</option>';
+			echo '<option value="fr">French</option>';
+			echo '<option value="de">German</option>';
+			echo '<option value="el">Greek</option>';
+			echo '<option value="gu">Gujarati</option>';
+			echo '<option value="hi">Hindi</option>';
+			echo '<option value="it">Italian</option>';
+			echo '<option value="ko">Korean</option>';
+			echo '<option value="fa">Persian</option>';
+			echo '<option value="pl">Polish</option>';
+			echo '<option value="pt">Portuguese</option>';
+			echo '<option value="pa">Punjabi</option>';
+			echo '<option value="ru">Russian</option>';
+			echo '<option value="ja">Japanese</option>';
+			echo '<option value="es">Spanish</option>';
+			echo '<option value="sw">Swahili</option>';
+			echo '<option value="sv">Swedish</option>';
+			echo '<option value="tr">Turkish</option>';
+			echo '<option value="ur">Urdu</option>';
+			echo '</select>';
+			
+			echo '<input type="submit" value="Translate">';
+				
+			echo '</form>';
 			?>
 		</font>
 	</body>
