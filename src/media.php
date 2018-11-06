@@ -59,12 +59,14 @@
 			
 			echo 'Media Filename: '.$media[1];
 			echo '<br /><br />';
-
-			echo '<video width="512" height="512" controls>';
-  			echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$media[1].'" type="video/mp4">';
-			echo '</video>'; 
-
 			
+			if ((substr($media[1], -4) != '.mov') && (substr($media[1], -4) != '.mxf')) {
+				echo '<video width="512" height="512" controls>';
+  				echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$media[1].'" type="video/mp4">';
+				echo '</video>'; 
+			} else {
+				echo '<img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$_GET['id'].'.png">';
+			}
 
 			echo '<br /><br />';
 			
