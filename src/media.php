@@ -84,29 +84,17 @@
 			
 			foreach ($files1 as $file) {
 				if (($file != '.') && ($file != '..')) {
-					echo '<option value="'.$file.'">'.$file.'</option>';
+					if (substr($file, -4) == '.srt') {
+						echo '<option value="'.$file.'">'.$file.'</option>';
+					}
 				}
-			
 			}
 			echo '</select>';
 			echo '<input type="submit" value="Render">';
 				
 			echo '</form>';
 			echo '<br /><br />';
-			
-			if (file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'])) {
-			
-				echo '<strong>Renders</strong><br />';
-			
-				$files = scandir(getenv('LANGUAGE_RENDERS').'/'.$_GET['id']);
-				foreach($files as $file) {
-					if (($file != '.') && ($file != '..')) {
-						echo '<a href="'.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
-					}
-				}
-			}
-			echo '<br /><br />';
-			
+		
 			echo '<strong>Machine Translation</strong><br />';
 		
 			echo '<form action="translate.php?id='.$_GET['id'].'" method="POST">';
@@ -116,9 +104,10 @@
 			
 			foreach ($files1 as $file) {
 				if (($file != '.') && ($file != '..')) {
-					echo '<option value="'.$file.'">'.$file.'</option>';
+					if (substr($file, -4) == '.srt') {
+						echo '<option value="'.$file.'">'.$file.'</option>';
+					}
 				}
-			
 			}
 			echo '</select>';
 			echo ' Source: <select name="source">';
@@ -443,6 +432,35 @@
 				
 			echo '</form>';
 			
+			echo '<br /><br />';
+			
+			if (file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'])) {
+			
+				echo '<strong>Renders</strong><br />';
+			
+				$files = scandir(getenv('LANGUAGE_RENDERS').'/'.$_GET['id']);
+				foreach($files as $file) {
+					if (($file != '.') && ($file != '..')) {
+						echo '<a href="'.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
+					}
+				}
+				echo '<br /><br />';
+			}
+			
+			if (file_exists(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'])) {
+			
+				echo '<strong>Subtitles</strong><br />';
+			
+				$files = scandir(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id']);
+				foreach($files as $file) {
+					if (($file != '.') && ($file != '..')) {
+						if (substr($file, -4) == '.srt') {
+							echo '<a href="'.getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
+						}
+					}
+				}
+				echo '<br /><br />';
+			}
 			
 			?>
 		</font>
