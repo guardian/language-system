@@ -31,8 +31,8 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        //mysql_query("INSERT INTO files (filename) VALUES ('".$_FILES["fileToUpload"]["name"]."')");
-        //$lastid = mysql_insert_id();
+		header("Location: media.php?id=".$_GET['id']);
+   		exit;
         
         
     } else {

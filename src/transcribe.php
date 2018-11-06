@@ -21,7 +21,8 @@
 			exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
 			exec('autosub -F srt -S '.$_POST['source'].' -D '.$_POST['source'].' -o '.getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$media[1].'.srt  '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
 			unlink(getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
-
+			header("Location: media.php?id=".$_GET['id']);
+   			exit;
 ?>
 		</font>
 	</body>

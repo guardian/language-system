@@ -42,7 +42,8 @@ fclose($fh);
 
 
 $myfile = file_put_contents(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$_POST['target'].'_'.$_POST['subtitles'], $data_to_write.PHP_EOL , FILE_APPEND | LOCK_EX);
-
+header("Location: media.php?id=".$_GET['id']);
+exit;
 ?>
 		</font>
 	</body>
