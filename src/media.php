@@ -37,7 +37,7 @@
 				} else {
 					while ($number_found == 0) {
 						$render_number++;
-						if (!file_exists('renders/'.$_GET['id'].'/'.$render_number.'_'.$media[1])) {
+						if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1])) {
 							$number_found = 1;
 						}
 					}
@@ -431,6 +431,29 @@
 			echo '</select>';
 			
 			echo '<input type="submit" value="Transcribe">';
+				
+			echo '</form>';
+			
+			echo '<br /><br />';
+			
+			
+			echo '<strong>Machine Speech</strong><br />';
+		
+			echo '<form action="speech.php?id='.$_GET['id'].'" method="POST">';
+			echo '<select name="subtitles">';
+			$dir    = 'subtitles/'.$_GET['id'];
+			$files1 = scandir($dir);
+			
+			foreach ($files1 as $file) {
+				if (($file != '.') && ($file != '..')) {
+					if (substr($file, -4) == '.srt') {
+						echo '<option value="'.$file.'">'.$file.'</option>';
+					}
+				}
+			}
+			echo '</select>';
+			
+			echo '<input type="submit" value="Render">';
 				
 			echo '</form>';
 			

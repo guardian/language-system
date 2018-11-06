@@ -27,7 +27,7 @@
 			}*/
 			
 			
-			$result = mysql_query("SELECT id, filename FROM files");
+			$result = mysql_query("SELECT id, filename FROM files ORDER BY id DESC");
 
 			while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
 				#printf("ID: %s  Filename: %s", $row[0], $row[1]);
