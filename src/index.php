@@ -34,7 +34,7 @@
 				}
 			}
 			
-			$result = mysql_query("SELECT id, filename FROM files ORDER BY id DESC LIMIT 16 OFFSET ".$page_offset);
+			$result = mysql_query("SELECT id, filename, extension, type FROM files ORDER BY id DESC LIMIT 16 OFFSET ".$page_offset);
 			
 			if (isset($_GET['p'])) {
 				if ($_GET['p'] != '1') {
@@ -52,7 +52,11 @@
 				echo '<div class="mediabox">';
 				echo '<a href="media.php?id='.$row[0].'">'.$row[1].'</a>';
 				echo '<br />';
-				echo '<a href="media.php?id='.$row[0].'"><img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$row[0].'.png"></a>';
+				if ($row[3] == 'v') {
+					echo '<a href="media.php?id='.$row[0].'"><img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$row[0].'.png"></a>';
+				} else {
+					echo '<a href="media.php?id='.$row[0].'"><img height="200" src="images/audio.png"></a>';
+				}
 				echo '</div>';
 			}
 			

@@ -16,8 +16,8 @@ if ($_FILES["fileToUpload"]["size"] > 5000000000000000000) {
     $uploadOk = 0;
 }
 // Allow certain file formats
-if($mediaFileType != "mp4" && $mediaFileType != "mxf" && $mediaFileType != "mov" && $mediaFileType != "mpg" && $mediaFileType != "MP4" && $mediaFileType != "MXF" && $mediaFileType != "MOV" && $mediaFileType != "MPG") {
-    echo "Sorry, only MP4, MXF, MOV & MPG files are allowed.";
+if($mediaFileType != "mp4" && $mediaFileType != "mxf" && $mediaFileType != "mov" && $mediaFileType != "mpg" && $mediaFileType != "MP4" && $mediaFileType != "MXF" && $mediaFileType != "MOV" && $mediaFileType != "MPG" && $mediaFileType != "wav" && $mediaFileType != "WAV" && $mediaFileType != "mp3" && $mediaFileType != "MP3" && $mediaFileType != "aiff" && $mediaFileType != "AIFF") {
+    echo "Sorry, only MP4, MXF, MOV, MPG, WAV, MP3, and AIFF files are allowed.";
     $uploadOk = 0;
 }
 // Check if $uploadOk is set to 0 by an error
@@ -25,11 +25,18 @@ if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
+	$mediaType = 'v';
+	if ($mediaFileType == "wav" || $mediaFileType == "WAV" || $mediaFileType == "mp3" || $mediaFileType == "MP3" || $mediaFileType == "aiff" || $mediaFileType == "AIFF") {
+		$mediaType = 'a';
+	} 
+
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        mysql_query("INSERT INTO files (filename) VALUES ('".$_FILES["fileToUpload"]["name"]."')");
+        mysql_query("INSERT INTO files (filename,extension,type) VALUES ('".$_FILES["fileToUpload"]["name"]."','".$mediaFileType."','".$mediaType."')");
         $lastid = mysql_insert_id();
-        exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$_FILES["fileToUpload"]["name"].' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');
+        if ($mediaType == 'v') {
+        	exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$_FILES["fileToUpload"]["name"].' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');\
+        }
         header("Location: index.php");
    		exit;
         
