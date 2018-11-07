@@ -26,8 +26,26 @@
 			
 			}*/
 			
+			$page_offset = 0;
 			
-			$result = mysql_query("SELECT id, filename FROM files ORDER BY id DESC");
+			if (isset($_GET['p'])) {
+				if (($_GET['p'] != '') && ($_GET['p'] != '1')) {
+					$page_offset = (intval($_GET['p']) * 16) - 16;
+				}
+			}
+			
+			$result = mysql_query("SELECT id, filename FROM files ORDER BY id DESC LIMIT 16 OFFSET ".$page_offset);
+			
+			if (isset($_GET['p'])) {
+				if ($_GET['p'] != '1') {
+					echo '<a href="index.php?p='.(intval($_GET['p']) - 1).'">< Previous</a> Page <a href="index.php?p='.(intval($_GET['p']) + 1).'">Next ></a>';
+				} else {
+					echo 'Page <a href="index.php?p=2">Next ></a>';
+				}
+			} else {
+				echo 'Page <a href="index.php?p=2">Next ></a>';
+			}
+			echo '<br />';
 
 			while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
 				#printf("ID: %s  Filename: %s", $row[0], $row[1]);
@@ -39,8 +57,18 @@
 			}
 			
 			#print_r($files1);
-
 			
+			echo '<br clear="all" />';
+			
+			if (isset($_GET['p'])) {
+				if ($_GET['p'] != '1') {
+					echo '<a href="index.php?p='.(intval($_GET['p']) - 1).'">< Previous</a> Page <a href="index.php?p='.(intval($_GET['p']) + 1).'">Next ></a>';
+				} else {
+					echo 'Page <a href="index.php?p=2">Next ></a>';
+				}
+			} else {
+				echo 'Page <a href="index.php?p=2">Next ></a>';
+			}
 			?>
 			<br clear="all" />
 			<br />
