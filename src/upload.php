@@ -3,7 +3,7 @@ include 'database.php';
 $target_dir = getenv('LANGUAGE_UPLOADS')."/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
-$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+$mediaFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 // Check if file already exists
 if (file_exists($target_file)) {
@@ -16,8 +16,7 @@ if ($_FILES["fileToUpload"]["size"] > 5000000000000000000) {
     $uploadOk = 0;
 }
 // Allow certain file formats
-if($imageFileType != "mp4" && $imageFileType != "mxf" && $imageFileType != "mov"
-&& $imageFileType != "mpg" ) {
+if($mediaFileType != "mp4" && $mediaFileType != "mxf" && $mediaFileType != "mov" && $mediaFileType != "mpg" && $mediaFileType != "MP4" && $mediaFileType != "MXF" && $mediaFileType != "MOV" && $mediaFileType != "MPG") {
     echo "Sorry, only MP4, MXF, MOV & MPG files are allowed.";
     $uploadOk = 0;
 }
