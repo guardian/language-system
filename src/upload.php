@@ -32,10 +32,15 @@ if ($uploadOk == 0) {
 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        mysql_query("INSERT INTO files (filename,extension,type) VALUES ('".$_FILES["fileToUpload"]["name"]."','".$mediaFileType."','".$mediaType."')");
+        
+        $final_name = str_replace(" ", "_", $_FILES["fileToUpload"]["name"]);
+        
+        rename(getenv('LANGUAGE_UPLOADS').'/'.$_FILES["fileToUpload"]["name"], getenv('LANGUAGE_UPLOADS').'/'.$final_name);
+        
+        mysql_query("INSERT INTO files (filename,extension,type) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."')");
         $lastid = mysql_insert_id();
         if ($mediaType == 'v') {
-        	exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$_FILES["fileToUpload"]["name"].' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');\
+        	exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$final_name.' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');
         }
         header("Location: index.php");
    		exit;
