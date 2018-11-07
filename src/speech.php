@@ -15,7 +15,7 @@ $result = mysql_query("SELECT id, filename FROM files where id = '".$_GET['id'].
 $media = mysql_fetch_array($result);
 
 $fh = fopen(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$_POST['subtitles'],'r');
-$data_to_write = '<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/10/synthesis http://www.w3.org/TR/speech-synthesis/synthesis.xsd" xml:lang="en-US">';
+$data_to_write = '<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/10/synthesis http://www.w3.org/TR/speech-synthesis/synthesis.xsd" xml:lang="'.$_POST['language'].'">';
 
 $lines = file(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$_POST['subtitles']);//file in to an array
 #echo $lines[1]; //line 2
@@ -85,6 +85,8 @@ if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1])) {
 	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3 -acodec copy -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1]);
 }
 
+unlink(getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
+unlink(getenv('LANGUAGE_WORKING').'/'.$_POST['subtitles'].'.ssml');
 
 header("Location: media.php?id=".$_GET['id']);
 exit;
