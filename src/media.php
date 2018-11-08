@@ -12,7 +12,7 @@
 			<?php
 			
 			include 'database.php';
-			$result = mysql_query("SELECT id, filename FROM files where id = '".$_GET['id']."'");
+			$result = mysql_query("SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
 			$media = mysql_fetch_array($result);
 			
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -60,12 +60,20 @@
 			echo 'Media Filename: '.$media[1];
 			echo '<br /><br />';
 			
-			if ((substr($media[1], -4) != '.mov') && (substr($media[1], -4) != '.mxf')) {
-				echo '<video width="512" height="512" controls>';
-  				echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$media[1].'" type="video/mp4">';
-				echo '</video>'; 
-			} else {
+			if (($media[2] == 'mov') || ($media[2] == 'mxf') || ($media[2] == 'MOV') || ($media[2] == 'MXF')) {
 				echo '<img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$_GET['id'].'.png">';
+			} elseif (($media[2] == 'aiff') || ($media[2] == 'AIFF')) {
+				echo '<img height="200" src="images/audio.png">';
+			} else {
+				if (($media[2] == 'wav') || ($media[2] == 'WAV') || ($media[2] == 'mp3') || ($media[2] == 'MP3')) {
+					echo '<video width="512" height="48" controls>';
+  					echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$media[1].'" type="video/mp4">';
+					echo '</video>';
+				} else {
+					echo '<video width="512" height="512" controls>';
+  					echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$media[1].'" type="video/mp4">';
+					echo '</video>';
+				}
 			}
 
 			echo '<br /><br />';
@@ -505,24 +513,26 @@
 			
 			echo '<br /><br />';
 			
-			echo '<strong>Subtitle Rendering</strong><br />';
-			echo '<form action="media.php?id='.$_GET['id'].'" method="POST">';
-			echo '<select name="subtitles">';
-			$dir    = 'subtitles/'.$_GET['id'];
-			$files1 = scandir($dir);
+			if ($media[3] == 'v') {
+				echo '<strong>Subtitle Rendering</strong><br />';
+				echo '<form action="media.php?id='.$_GET['id'].'" method="POST">';
+				echo '<select name="subtitles">';
+				$dir    = 'subtitles/'.$_GET['id'];
+				$files1 = scandir($dir);
 			
-			foreach ($files1 as $file) {
-				if (($file != '.') && ($file != '..')) {
-					if (substr($file, -4) == '.srt') {
-						echo '<option value="'.$file.'">'.$file.'</option>';
+				foreach ($files1 as $file) {
+					if (($file != '.') && ($file != '..')) {
+						if (substr($file, -4) == '.srt') {
+							echo '<option value="'.$file.'">'.$file.'</option>';
+						}
 					}
 				}
-			}
-			echo '</select>';
-			echo '<input type="submit" value="Render">';
+				echo '</select>';
+				echo '<input type="submit" value="Render">';
 				
-			echo '</form>';
-			echo '<br /><br />';
+				echo '</form>';
+				echo '<br /><br />';
+			}
 			
 			echo '<strong>Subtitle Upload</strong><br />';
 			echo '<form action="uploadsubtitles.php?id='.$_GET['id'].'" method="post" enctype="multipart/form-data">';
