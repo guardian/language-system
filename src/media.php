@@ -507,7 +507,8 @@
 			echo '<option value="cy">Welsh</option>';
 			echo '</select>';
 			
-			echo '<input type="submit" value="Render">';
+			echo '<input type="submit" name="video" value="Render to Video">';
+			echo '<input type="submit" name="audio" value="Render to Audio">';
 				
 			echo '</form>';
 			

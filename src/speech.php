@@ -59,33 +59,52 @@ fclose($fh);
 $data_to_write .= '</speak>';
 $myfile = file_put_contents(getenv('LANGUAGE_WORKING').'/'.$_POST['subtitles'].'.ssml', $data_to_write.PHP_EOL , FILE_APPEND | LOCK_EX);
 
-exec('espeak -m -f '.getenv('LANGUAGE_WORKING').'/'.$_POST['subtitles'].'.ssml --stdout | '.getenv('LANGUAGE_FFMPEG').' -i - -ar 44100 -ac 2 -ab 192k -f mp3 '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
-
-
 if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'])) {
 	mkdir(getenv('LANGUAGE_RENDERS').'/'.$_GET['id']);
 }
 
 chmod(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'], 0777);
 
-$render_number = 0;
-$number_found = 0;
+if (isset($_POST['video'])) {
+	exec('espeak -m -f '.getenv('LANGUAGE_WORKING').'/'.$_POST['subtitles'].'.ssml --stdout | '.getenv('LANGUAGE_FFMPEG').' -i - -ar 44100 -ac 2 -ab 192k -f mp3 '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
 
-if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1])) {
+	$render_number = 0;
+	$number_found = 0;
 
-	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3 -acodec copy -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1]);
+	if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1])) {
+
+		exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3 -acodec copy -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1]);
 	
-} else {
-	while ($number_found == 0) {
-		$render_number++;
-		if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1])) {
-			$number_found = 1;
+	} else {
+		while ($number_found == 0) {
+			$render_number++;
+			if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1])) {
+				$number_found = 1;
+			}
 		}
+		exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3 -acodec copy -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1]);
 	}
-	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3 -acodec copy -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1]);
-}
 
-unlink(getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
+	unlink(getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
+} else {
+	$render_number = 0;
+	$number_found = 0;
+
+	if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1].'.mp3')) {
+
+		exec('espeak -m -f '.getenv('LANGUAGE_WORKING').'/'.$_POST['subtitles'].'.ssml --stdout | '.getenv('LANGUAGE_FFMPEG').' -i - -ar 44100 -ac 2 -ab 192k -f mp3 '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1].'.mp3');
+	
+	} else {
+		while ($number_found == 0) {
+			$render_number++;
+			if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1].'.mp3')) {
+				$number_found = 1;
+			}
+		}
+		exec('espeak -m -f '.getenv('LANGUAGE_WORKING').'/'.$_POST['subtitles'].'.ssml --stdout | '.getenv('LANGUAGE_FFMPEG').' -i - -ar 44100 -ac 2 -ab 192k -f mp3 '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1].'.mp3');
+	}
+
+}
 unlink(getenv('LANGUAGE_WORKING').'/'.$_POST['subtitles'].'.ssml');
 
 header("Location: media.php?id=".$_GET['id']);
