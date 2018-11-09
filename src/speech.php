@@ -85,7 +85,7 @@ if (isset($_POST['video'])) {
 		exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.wav -acodec aac -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1]);
 	}
 
-	unlink(getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
+	unlink(getenv('LANGUAGE_WORKING').'/'.$media[1].'.wav');
 } else {
 	$render_number = 0;
 	$number_found = 0;
