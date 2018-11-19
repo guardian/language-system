@@ -4,6 +4,7 @@
 			Language System
 		</title>
 		<link rel="stylesheet" type="text/css" href="main.css">
+		<script type="text/javascript" src="vendor/moxiecode/plupload/js/plupload.full.min.js"></script>
 	</head>
 	<body bgcolor="#000000" text="#fbfbfb" link="#dfe7ff" VLINK="#f7e1ff" ALINK="#ffe1e2">
 		<font face="Century Gothic,Apple Gothic,AppleGothic,URW Gothic L,Avant Garde,Futura,sans-serif" SIZE="-1">
@@ -77,12 +78,66 @@
 			<br clear="all" />
 			<br />
 			<br />
-			<form action="upload.php" method="post" enctype="multipart/form-data">
-    			Select file to upload:
-    			<input type="file" name="fileToUpload" id="fileToUpload">
-    			<input type="submit" value="Upload File" name="submit">
-			</form>
+			<strong>Media Upload</strong>
+			<div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+			<br />
+
+			<div id="container">
+				<a id="pickfiles" href="javascript:;">[Select files]</a> 
+				<a id="uploadfiles" href="javascript:;">[Upload files]</a>
+			</div>
+
+			<br />
+			<pre id="console"></pre>
 			
 		</font>
+		
+		<script type="text/javascript">
+		var uploader = new plupload.Uploader({
+			runtimes : 'html5,flash,silverlight,html4',
+			browse_button : 'pickfiles',
+			container: document.getElementById('container'),
+			url : 'uploader.php',
+			flash_swf_url : 'vendor/moxiecode/plupload/js/Moxie.swf',
+			silverlight_xap_url : 'vendor/moxiecode/plupload/js/Moxie.xap',
+			chunk_size: '512kb',
+	
+			filters : {
+				max_file_size : '50000mb',
+				mime_types: [
+					{title : "Video files", extensions : "mov,mp4,mxf,mpg"},
+					{title : "Audio files", extensions : "aiff,mp3,wav"}
+				]
+			},
+
+			init: {
+				PostInit: function() {
+					document.getElementById('filelist').innerHTML = '';
+
+					document.getElementById('uploadfiles').onclick = function() {
+						uploader.start();
+						return false;
+					};
+				},
+
+				FilesAdded: function(up, files) {
+					plupload.each(files, function(file) {
+						document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+					});
+				},
+
+				UploadProgress: function(up, file) {
+					document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+				},
+
+				Error: function(up, err) {
+					document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
+				}
+			}
+		});
+
+		uploader.init();
+
+		</script>
 	</body>
 </html>
