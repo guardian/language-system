@@ -90,6 +90,10 @@
 			<br />
 			<pre id="console"></pre>
 			
+			<br />
+			<br />
+			<a href="github.php">Code Updates (GitHub Commits)</a> <a href="https://github.com/guardian/language-system/issues">Report a bug</a> <a href="https://github.com/guardian/language-system/issues">Request a feature</a>
+			
 		</font>
 		
 		<script type="text/javascript">

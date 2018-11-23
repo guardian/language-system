@@ -7,3 +7,34 @@ div.mediabox {
   filter: alpha(opacity=92);
   opacity: 0.92;
 }
+
+div.git_data_message {
+	clear: left;
+	float: left;
+	width: 600px;
+	padding: 5px;
+}
+
+div.git_data_date {
+	float: left;
+	width: 180px;
+	padding: 5px;
+}
+
+div.git_data_user {
+	float: left;
+	width: 160px;
+	padding: 5px;
+}
+
+div.git_data_email {
+	float: left;
+	width: 280px;
+	padding: 5px;
+}
+
+div.git_data_id {
+	float: left;
+	width: 360px;
+	padding: 5px;
+}
