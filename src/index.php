@@ -35,7 +35,7 @@
 				}
 			}
 			
-			$result = mysql_query("SELECT id, filename, extension, type FROM files ORDER BY id DESC LIMIT 16 OFFSET ".$page_offset);
+			$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files ORDER BY id DESC LIMIT 16 OFFSET ".$page_offset);
 			
 			if (isset($_GET['p'])) {
 				if ($_GET['p'] != '1') {
@@ -48,7 +48,7 @@
 			}
 			echo '<br />';
 
-			while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+			while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 				#printf("ID: %s  Filename: %s", $row[0], $row[1]);
 				echo '<div class="mediabox">';
 				echo '<a href="media.php?id='.$row[0].'">'.$row[1].'</a>';

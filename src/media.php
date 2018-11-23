@@ -12,8 +12,8 @@
 			<?php
 			
 			include 'database.php';
-			$result = mysql_query("SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
-			$media = mysql_fetch_array($result);
+			$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
+			$media = mysqli_fetch_array($result);
 			
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				#echo $_POST['subtitles'];

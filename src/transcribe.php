@@ -12,8 +12,8 @@
 <?php
 
 			include 'database.php';
-			$result = mysql_query("SELECT id, filename FROM files where id = '".$_GET['id']."'");
-			$media = mysql_fetch_array($result);
+			$result = mysqli_query($database, "SELECT id, filename FROM files where id = '".$_GET['id']."'");
+			$media = mysqli_fetch_array($result);
 			
 			mkdir(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id']);
 			chmod(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'], 0777);

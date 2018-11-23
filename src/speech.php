@@ -11,8 +11,8 @@
 
 <?php
 include 'database.php';
-$result = mysql_query("SELECT id, filename FROM files where id = '".$_GET['id']."'");
-$media = mysql_fetch_array($result);
+$result = mysqli_query($database, "SELECT id, filename FROM files where id = '".$_GET['id']."'");
+$media = mysqli_fetch_array($result);
 
 $fh = fopen(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$_POST['subtitles'],'r');
 $data_to_write = '<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/10/synthesis http://www.w3.org/TR/speech-synthesis/synthesis.xsd" xml:lang="'.$_POST['language'].'">';
