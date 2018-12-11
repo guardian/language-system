@@ -12,6 +12,7 @@
 			<?php
 			
 			include 'database.php';
+			include('session.php');
 			$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
 			$media = mysqli_fetch_array($result);
 			
