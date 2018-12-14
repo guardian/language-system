@@ -13,6 +13,7 @@
 			
 			include 'database.php';
 			include('session.php');
+			include('jobs.php');
 			$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
 			$media = mysqli_fetch_array($result);
 			
@@ -20,41 +21,16 @@
 				#echo $_POST['subtitles'];
 				
 				#ffmpeg -i video.avi -vf subtitles=subtitle.srt out.avi
-				
-				
-				if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'])) {
-					mkdir(getenv('LANGUAGE_RENDERS').'/'.$_GET['id']);
-				}
-				
-				chmod(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'], 0777);
-				
-				$render_number = 0;
-				$number_found = 0;
-				
-				if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1])) {
-				
-					exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -vf subtitles='.getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$_POST['subtitles'].' '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$media[1]);
-					
-				} else {
-					while ($number_found == 0) {
-						$render_number++;
-						if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1])) {
-							$number_found = 1;
-						}
-					}
-					exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -vf subtitles='.getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$_POST['subtitles'].' '.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$render_number.'_'.$media[1]);
-				}
-				
+
+				start_job('subtitle_rendering.php',$login_session,$_GET['id'],$media[1],$_POST['subtitles']);
+	
 				#exec('ffmpeg -i uploads/'.$media[1].' -filter:v subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' -c:a copy -c:v libx264 -crf 22 -preset veryfast renders/'.$_GET['id'].'/'.$media[1]);
 				
 				#ffmpeg -i input.mp4 -filter:v subtitles=subtitle.srt -c:a copy -c:v libx264 -crf 22 -preset veryfast output.mp4
 				
 				#ffmpeg -i infile.mp4 -i infile.srt -c copy -c:s mov_text outfile.mp4
-				
 
-				
 			}
-			
 
 			#print_r($media);
 			
