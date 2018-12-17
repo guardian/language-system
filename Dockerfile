@@ -21,6 +21,8 @@ RUN sudo -H -u www-data bash -c 'php composer.phar require stichoza/google-trans
 RUN sudo -H -u www-data bash -c 'php composer.phar require moxiecode/plupload'
 RUN docker-php-ext-install mysqli
 COPY src/* /var/www/html/
+COPY src/images/* /var/www/html/images/
+COPY src/jobs/* /var/www/html/jobs/
 COPY setup/php.ini /usr/local/etc/php
 RUN mkdir working
 RUN mkdir subtitles
