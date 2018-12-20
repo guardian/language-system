@@ -1,7 +1,12 @@
 <?php
+include('jobs.php');
 
 $name = 'eSpeak/FFMPEG';
 $type = 'Speech Rendering to Video';
+$user = $argv[1];
+$input1 = $argv[2];
+$input2 = $argv[3];
+$input3 = $argv[4];
 
 $new_job = register_job($name,$type,$user,$input1,$input2,$input3);
 

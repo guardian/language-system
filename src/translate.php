@@ -10,9 +10,8 @@
 		<font face="Century Gothic,Apple Gothic,AppleGothic,URW Gothic L,Avant Garde,Futura,sans-serif" SIZE="-1">
 <?php
 include('session.php');
-include('jobs.php');
 
-start_job('translate.php',$login_session,$_GET['id'],$_POST['subtitles'],$_POST['source'],$_POST['target']);
+exec("php jobs/translate.php ".$login_session." ".$_GET['id']." ".$_POST['subtitles']." ".$_POST['source']." ".$_POST['target']." >&- <&- >/dev/null &");
 
 header("Location: media.php?id=".$_GET['id']);
 exit;

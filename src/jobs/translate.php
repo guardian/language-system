@@ -1,7 +1,13 @@
 <?php
+include('jobs.php');
 
 $name = 'Google Translate PHP';
 $type = 'Translation';
+$user = $argv[1];
+$input1 = $argv[2];
+$input2 = $argv[3];
+$input3 = $argv[4];
+$input4 = $argv[5];
 
 $new_job = register_job($name,$type,$user,$input1,$input2,$input3,$input4);
 

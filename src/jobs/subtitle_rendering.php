@@ -1,7 +1,12 @@
 <?php
+include('jobs.php');
 
 $name = 'FFMPEG';
 $type = 'Subtitle Rendering';
+$user = $argv[1];
+$input1 = $argv[2];
+$input2 = $argv[3];
+$input3 = $argv[4];
 
 $new_job = register_job($name,$type,$user,$input1,$input2,$input3);
 
@@ -43,5 +48,4 @@ if ($result == 0) {
 } else {
 	finish_job($new_job,'Failed');
 } 
-
 ?>

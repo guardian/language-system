@@ -11,12 +11,11 @@
 
 <?php
 include('session.php');
-include('jobs.php');
 
 if (isset($_POST['video'])) {
-	start_job('speech_video.php',$login_session,$_GET['id'],$_POST['subtitles'],$_POST['language']);
+	exec("php jobs/speech_video.php ".$login_session." ".$_GET['id']." ".$_POST['subtitles']." ".$_POST['language']." >&- <&- >/dev/null &");
 } else {
-	start_job('speech_audio.php',$login_session,$_GET['id'],$_POST['subtitles'],$_POST['language']);
+	exec("php jobs/speech_audio.php ".$login_session." ".$_GET['id']." ".$_POST['subtitles']." ".$_POST['language']." >&- <&- >/dev/null &");
 }
 
 header("Location: media.php?id=".$_GET['id']);

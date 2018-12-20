@@ -1,7 +1,11 @@
 <?php
+include('jobs.php');
 
 $name = 'Autosub';
 $type = 'Subtitle Transcription';
+$user = $argv[1];
+$input1 = $argv[2];
+$input2 = $argv[3];
 
 $new_job = register_job($name,$type,$user,$input1,$input2);
 
