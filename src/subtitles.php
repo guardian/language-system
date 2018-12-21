@@ -8,10 +8,15 @@
 	</head>
 	<body bgcolor="#000000" text="#fbfbfb" link="#dfe7ff" VLINK="#f7e1ff" ALINK="#ffe1e2">
 		<font face="Century Gothic,Apple Gothic,AppleGothic,URW Gothic L,Avant Garde,Futura,sans-serif" SIZE="-1">
+
 <?php
+include('database.php');
 include('session.php');
 
-exec("php jobs/translate.php ".$login_session." ".$_GET['id']." ".$_POST['subtitles']." ".$_POST['source']." ".$_POST['target']." >&- <&- >/dev/null &");
+$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
+$media = mysqli_fetch_array($result);
+
+exec("php jobs/subtitle_rendering.php ".$login_session." ".$_GET['id']." ".$media[1]." ".$_POST['subtitles']." >&- <&- >/dev/null &");
 
 header("Location: job_info_get.php?id=".$_GET['id']);
 exit;

@@ -22,7 +22,6 @@
 				
 				#ffmpeg -i video.avi -vf subtitles=subtitle.srt out.avi
 
-				exec("php jobs/subtitle_rendering.php ".$login_session." ".$_GET['id']." ".$media[1]." ".$_POST['subtitles']." >&- <&- >/dev/null &");
 				#exec('ffmpeg -i uploads/'.$media[1].' -filter:v subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' -c:a copy -c:v libx264 -crf 22 -preset veryfast renders/'.$_GET['id'].'/'.$media[1]);
 				
 				#ffmpeg -i input.mp4 -filter:v subtitles=subtitle.srt -c:a copy -c:v libx264 -crf 22 -preset veryfast output.mp4
@@ -492,7 +491,7 @@
 			
 			if ($media[3] == 'v') {
 				echo '<strong>Subtitle Rendering</strong><br />';
-				echo '<form action="media.php?id='.$_GET['id'].'" method="POST">';
+				echo '<form action="subtitles.php?id='.$_GET['id'].'" method="POST">';
 				echo '<select name="subtitles">';
 				$dir    = 'subtitles/'.$_GET['id'];
 				$files1 = scandir($dir);

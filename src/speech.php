@@ -18,7 +18,7 @@ if (isset($_POST['video'])) {
 	exec("php jobs/speech_audio.php ".$login_session." ".$_GET['id']." ".$_POST['subtitles']." ".$_POST['language']." >&- <&- >/dev/null &");
 }
 
-header("Location: media.php?id=".$_GET['id']);
+header("Location: job_info_get.php?id=".$_GET['id']);
 exit;
 ?>
 		</font>

@@ -14,7 +14,7 @@ include('session.php');
 
 exec("php jobs/transcribe.php ".$login_session." ".$_GET['id']." ".$_POST['source']." >&- <&- >/dev/null &");
 
-header("Location: media.php?id=".$_GET['id']);
+header("Location: job_info_get.php?id=".$_GET['id']);
 exit;
 ?>
 		</font>

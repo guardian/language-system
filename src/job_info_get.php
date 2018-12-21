@@ -1,19 +1,22 @@
 <html>
 	<head>
 		<title>
-			Language System
+			Language System - Job Information
 		</title>
 		<link rel="stylesheet" type="text/css" href="main.css">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	<body bgcolor="#000000" text="#fbfbfb" link="#dfe7ff" VLINK="#f7e1ff" ALINK="#ffe1e2">
 		<font face="Century Gothic,Apple Gothic,AppleGothic,URW Gothic L,Avant Garde,Futura,sans-serif" SIZE="-1">
+
 <?php
+include('database.php');
 include('session.php');
+sleep(1);
+$result = mysqli_query($database, "SELECT * FROM jobs where input1 = '".$_GET['id']."' and user = '".$login_session."' ORDER BY id DESC limit 1");
+$job = mysqli_fetch_array($result);
 
-exec("php jobs/translate.php ".$login_session." ".$_GET['id']." ".$_POST['subtitles']." ".$_POST['source']." ".$_POST['target']." >&- <&- >/dev/null &");
-
-header("Location: job_info_get.php?id=".$_GET['id']);
+header("Location: job_info.php?id=".$job[0]);
 exit;
 ?>
 		</font>
