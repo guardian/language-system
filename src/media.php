@@ -31,7 +31,8 @@
 			}
 
 			#print_r($media);
-			
+			include('navigation.php');
+			echo '<br /><br />';
 			echo 'Media Filename: '.$media[1];
 			echo '<br /><br />';
 			
