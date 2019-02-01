@@ -490,6 +490,44 @@
 			
 			echo '<br /><br />';
 			
+			echo '<strong>Machine Speech (Mac OS)</strong><br />';
+		
+			echo '<form action="speechmac.php?id='.$_GET['id'].'" method="POST">';
+			echo '<select name="subtitles">';
+			$dir    = 'subtitles/'.$_GET['id'];
+			$files1 = scandir($dir);
+			
+			foreach ($files1 as $file) {
+				if (($file != '.') && ($file != '..')) {
+					if (substr($file, -4) == '.srt') {
+						echo '<option value="'.$file.'">'.$file.'</option>';
+					}
+				}
+			}
+			echo '</select>';
+			
+			echo ' Voice: <select name="voice">';
+			echo '<option value="Kate">Kate (British English)</option>';
+			echo '<option value="Serena">Serena (British English)</option>';
+			echo '<option value="Daniel">Daniel (British English)</option>';
+			echo '<option value="Fiona">Fiona (Scottish English)</option>';
+			echo '<option value="Moira">Moira (Irish English)</option>';
+			echo '<option value="Veena">Veena (Indian English)</option>';
+			echo '<option value="Karen">Karen (Australian English)</option>';
+			echo '<option value="Tessa">Tessa (South African English)</option>';
+			echo '<option value="Allison">Allison (United States of America English)</option>';
+			echo '<option value="Ava">Ava (United States of America English)</option>';
+			echo '<option value="Samantha">Samantha (United States of America English)</option>';
+			echo '<option value="Susan">Susan (United States of America English)</option>';
+			echo '</select>';
+			
+			echo '<input type="submit" name="video" value="Render to Video">';
+			echo '<input type="submit" name="audio" value="Render to Audio">';
+				
+			echo '</form>';
+			
+			echo '<br /><br />';
+			
 			if ($media[3] == 'v') {
 				echo '<strong>Subtitle Rendering</strong><br />';
 				echo '<form action="subtitles.php?id='.$_GET['id'].'" method="POST">';
