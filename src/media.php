@@ -6,26 +6,26 @@
 		<link rel="stylesheet" type="text/css" href="main.css">
 	</head>
 	<body bgcolor="#000000" text="#fbfbfb" link="#dfe7ff" VLINK="#f7e1ff" ALINK="#ffe1e2">
-		<font face="Century Gothic,Apple Gothic,AppleGothic,URW Gothic L,Avant Garde,Futura,sans-serif" SIZE="-1">
+		<font face="Century Gothic,Avant Garde,Apple Gothic,AppleGothic,URW Gothic L,Avant Garde,Futura,sans-serif" SIZE="-1">
 
-			
+
 			<?php
-			
+
 			include 'database.php';
 			include('session.php');
 			include('jobs.php');
 			$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
 			$media = mysqli_fetch_array($result);
-			
+
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				#echo $_POST['subtitles'];
-				
+
 				#ffmpeg -i video.avi -vf subtitles=subtitle.srt out.avi
 
 				#exec('ffmpeg -i uploads/'.$media[1].' -filter:v subtitles=subtitles/'.$_GET['id'].'/'.$_POST['subtitles'].' -c:a copy -c:v libx264 -crf 22 -preset veryfast renders/'.$_GET['id'].'/'.$media[1]);
-				
+
 				#ffmpeg -i input.mp4 -filter:v subtitles=subtitle.srt -c:a copy -c:v libx264 -crf 22 -preset veryfast output.mp4
-				
+
 				#ffmpeg -i infile.mp4 -i infile.srt -c copy -c:s mov_text outfile.mp4
 
 			}
@@ -35,7 +35,7 @@
 			echo '<br /><br />';
 			echo 'Media Filename: '.$media[1];
 			echo '<br /><br />';
-			
+
 			if (($media[2] == 'mov') || ($media[2] == 'mxf') || ($media[2] == 'MOV') || ($media[2] == 'MXF')) {
 				echo '<img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$_GET['id'].'.png">';
 			} elseif (($media[2] == 'aiff') || ($media[2] == 'AIFF')) {
@@ -53,10 +53,10 @@
 			}
 
 			echo '<br /><br />';
-			
-			
+
+
 			echo '<strong>Machine Transcription</strong><br />';
-		
+
 			echo '<form action="transcribe.php?id='.$_GET['id'].'" method="POST">';
 
 			echo ' Source Language: <select name="source">';
@@ -152,20 +152,20 @@
 			echo '<option value="yo">Yoruba</option>';
 			echo '<option value="zu">Zulu</option>';
 			echo '</select>';
-			
+
 			echo '<input type="submit" value="Transcribe">';
-				
+
 			echo '</form>';
-			
+
 			echo '<br /><br />';
 
 			echo '<strong>Machine Translation</strong><br />';
-		
+
 			echo '<form action="translate.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="subtitles">';
 			$dir    = 'subtitles/'.$_GET['id'];
 			$files1 = scandir($dir);
-			
+
 			foreach ($files1 as $file) {
 				if (($file != '.') && ($file != '..')) {
 					if (substr($file, -4) == '.srt') {
@@ -280,7 +280,7 @@
 			echo '<option value="yo">Yoruba</option>';
 			echo '<option value="zu">Zulu</option>';
 			echo '</select>';
-			
+
 			echo ' Target: <select name="target">';
 			echo '<option value="af">Afrikaans</option>';
 			echo '<option value="sq">Albanian</option>';
@@ -387,22 +387,22 @@
 			echo '<option value="yo">Yoruba</option>';
 			echo '<option value="zu">Zulu</option>';
 			echo '</select>';
-			
+
 			echo '<input type="submit" value="Translate">';
-				
+
 			echo '</form>';
-			
+
 			echo '<br /><br />';
-			
-		
-			
+
+
+
 			echo '<strong>Machine Speech</strong><br />';
-		
+
 			echo '<form action="speech.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="subtitles">';
 			$dir    = 'subtitles/'.$_GET['id'];
 			$files1 = scandir($dir);
-			
+
 			foreach ($files1 as $file) {
 				if (($file != '.') && ($file != '..')) {
 					if (substr($file, -4) == '.srt') {
@@ -411,7 +411,7 @@
 				}
 			}
 			echo '</select>';
-			
+
 			echo ' Language: <select name="language">';
 			echo '<option value="en">English</option>';
 			echo '<option value="en-gb">English (British)</option>';
@@ -482,21 +482,21 @@
 			echo '<option value="vi-sgn">Vietnamese (South)</option>';
 			echo '<option value="cy">Welsh</option>';
 			echo '</select>';
-			
+
 			echo '<input type="submit" name="video" value="Render to Video">';
 			echo '<input type="submit" name="audio" value="Render to Audio">';
-				
+
 			echo '</form>';
-			
+
 			echo '<br /><br />';
-			
+
 			echo '<strong>Machine Speech (Mac OS)</strong><br />';
-		
+
 			echo '<form action="speechmac.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="subtitles">';
 			$dir    = 'subtitles/'.$_GET['id'];
 			$files1 = scandir($dir);
-			
+
 			foreach ($files1 as $file) {
 				if (($file != '.') && ($file != '..')) {
 					if (substr($file, -4) == '.srt') {
@@ -505,7 +505,7 @@
 				}
 			}
 			echo '</select>';
-			
+
 			echo ' Voice: <select name="voice">';
 			echo '<option value="Kate">Kate (British English)</option>';
 			echo '<option value="Serena">Serena (British English)</option>';
@@ -519,22 +519,38 @@
 			echo '<option value="Ava">Ava (United States of America English)</option>';
 			echo '<option value="Samantha">Samantha (United States of America English)</option>';
 			echo '<option value="Susan">Susan (United States of America English)</option>';
+			echo '<option value="Ting-Ting">Ting-Ting (Chinese)</option>';
+			echo '<option value="Sin-ji">Sin-ja (Hong Kong Chinese)</option>';
+			echo '<option value="Mei-Jia">Mei-Jia (Taiwanese Chinese)</option>';
+			echo '<option value="Audrey">Audrey (French)</option>';
+			echo '<option value="Aurelie">Aurelie (French)</option>';
+			echo '<option value="Anna">Anna (German)</option>';
+			echo '<option value="Markus">Markus (German)</option>';
+			echo '<option value="Petra">Petra (German)</option>';
+			echo '<option value="Yannick">Yannick (German)</option>';
+			echo '<option value="Lekha">Lekha (Hindi)</option>';
+			echo '<option value="Kyoko">Kyoko (Japanese)</option>';
+			echo '<option value="Otoya">Otoya (Japanese)</option>';
+			echo '<option value="Katya">Katya (Russian)</option>';
+			echo '<option value="Milena">Milena (Russian)</option>';
+			echo '<option value="Jorge">Jorge (Spanish)</option>';
+			echo '<option value="Monica">Monica (Spanish)</option>';
 			echo '</select>';
-			
+
 			echo '<input type="submit" name="video" value="Render to Video">';
 			echo '<input type="submit" name="audio" value="Render to Audio">';
-				
+
 			echo '</form>';
-			
+
 			echo '<br /><br />';
-			
+
 			if ($media[3] == 'v') {
 				echo '<strong>Subtitle Rendering</strong><br />';
 				echo '<form action="subtitles.php?id='.$_GET['id'].'" method="POST">';
 				echo '<select name="subtitles">';
 				$dir    = 'subtitles/'.$_GET['id'];
 				$files1 = scandir($dir);
-			
+
 				foreach ($files1 as $file) {
 					if (($file != '.') && ($file != '..')) {
 						if (substr($file, -4) == '.srt') {
@@ -544,11 +560,11 @@
 				}
 				echo '</select>';
 				echo '<input type="submit" value="Render">';
-				
+
 				echo '</form>';
 				echo '<br /><br />';
 			}
-			
+
 			echo '<strong>Subtitle Upload</strong><br />';
 			echo '<form action="uploadsubtitles.php?id='.$_GET['id'].'" method="post" enctype="multipart/form-data">';
     		?>Select subtitles to upload:
@@ -557,12 +573,12 @@
 			</form>
 			<?php
 			echo '<br /><br />';
-			
-			
+
+
 			if (file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'])) {
-			
+
 				echo '<strong>Renders</strong><br />';
-			
+
 				$files = scandir(getenv('LANGUAGE_RENDERS').'/'.$_GET['id']);
 				foreach($files as $file) {
 					if (($file != '.') && ($file != '..')) {
@@ -571,11 +587,11 @@
 				}
 				echo '<br /><br />';
 			}
-			
+
 			if (file_exists(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'])) {
-			
+
 				echo '<strong>Subtitles</strong><br />';
-			
+
 				$files = scandir(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id']);
 				foreach($files as $file) {
 					if (($file != '.') && ($file != '..')) {
@@ -586,7 +602,7 @@
 				}
 				echo '<br /><br />';
 			}
-			
+
 			?>
 		</font>
 	</body>

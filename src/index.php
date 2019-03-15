@@ -7,7 +7,7 @@
 		<script type="text/javascript" src="vendor/moxiecode/plupload/js/plupload.full.min.js"></script>
 	</head>
 	<body bgcolor="#000000" text="#fbfbfb" link="#dfe7ff" VLINK="#f7e1ff" ALINK="#ffe1e2">
-		<font face="Century Gothic,Apple Gothic,AppleGothic,URW Gothic L,Avant Garde,Futura,sans-serif" SIZE="-1">
+		<font face="Century Gothic,Avant Garde,Apple Gothic,AppleGothic,URW Gothic L,Avant Garde,Futura,sans-serif" SIZE="-1">
 			<?php
 			include 'database.php';
 			include('session.php');
@@ -17,27 +17,27 @@
 			<br />
 			<br />
 			<?php
-			
+
 			$dir    = getenv('LANGUAGE_UPLOADS').'/';
 			$files1 = scandir($dir);
-			
+
 			/*
 			foreach ($files1 as $file) {
-			
+
 				echo '<br />'. $file;
-			
+
 			}*/
-			
+
 			$page_offset = 0;
-			
+
 			if (isset($_GET['p'])) {
 				if (($_GET['p'] != '') && ($_GET['p'] != '1')) {
 					$page_offset = (intval($_GET['p']) * 16) - 16;
 				}
 			}
-			
+
 			$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files ORDER BY id DESC LIMIT 16 OFFSET ".$page_offset);
-			
+
 			if (isset($_GET['p'])) {
 				if ($_GET['p'] != '1') {
 					echo '<a href="index.php?p='.(intval($_GET['p']) - 1).'">< Previous</a> Page <a href="index.php?p='.(intval($_GET['p']) + 1).'">Next ></a>';
@@ -61,11 +61,11 @@
 				}
 				echo '</div>';
 			}
-			
+
 			#print_r($files1);
-			
+
 			echo '<br clear="all" />';
-			
+
 			if (isset($_GET['p'])) {
 				if ($_GET['p'] != '1') {
 					echo '<a href="index.php?p='.(intval($_GET['p']) - 1).'">< Previous</a> Page <a href="index.php?p='.(intval($_GET['p']) + 1).'">Next ></a>';
@@ -84,19 +84,19 @@
 			<br />
 
 			<div id="container">
-				<a id="pickfiles" href="javascript:;">[Select files]</a> 
+				<a id="pickfiles" href="javascript:;">[Select files]</a>
 				<a id="uploadfiles" href="javascript:;">[Upload files]</a>
 			</div>
 
 			<br />
 			<pre id="console"></pre>
-			
+
 			<br />
 			<br />
 			<a href="github.php">Code Updates (GitHub Commits)</a> <a href="https://github.com/guardian/language-system/issues">Report a bug</a> <a href="https://github.com/guardian/language-system/issues">Request a feature</a>
-			
+
 		</font>
-		
+
 		<script type="text/javascript">
 		var uploader = new plupload.Uploader({
 			runtimes : 'html5,flash,silverlight,html4',
@@ -106,7 +106,7 @@
 			flash_swf_url : 'vendor/moxiecode/plupload/js/Moxie.swf',
 			silverlight_xap_url : 'vendor/moxiecode/plupload/js/Moxie.xap',
 			chunk_size: '512kb',
-	
+
 			filters : {
 				max_file_size : '50000mb',
 				mime_types: [

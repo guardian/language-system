@@ -44,21 +44,21 @@ while ($line = fgets($fh)) {
 		$time_one = (intval(substr($line, 3, 2)) * 60000) + $time_one;
 		$time_one = (intval(substr($line, 6, 2)) * 1000) + $time_one;
 		$time_one = intval(substr($line, 9, 3)) + $time_one;
-		
+
 		if ($first_run == 1) {
 			$first_run = 0;
 			$data_to_write .= '[[slnc '.$time_one.']]';
 		} else {
 			$data_to_write .= '[[slnc '.($time_one - $time_two).']]';
 		}
-		
+
 		$time_two = intval(substr($line, 17, 2)) * 3600000;
 		$time_two = (intval(substr($line, 20, 2)) * 60000) + $time_two;
 		$time_two = (intval(substr($line, 23, 2)) * 1000) + $time_two;
 		$time_two = intval(substr($line, 26, 3)) + $time_two;
-		
+
 	}
-	
+
 }
 fclose($fh);
 
@@ -66,7 +66,7 @@ $myvoicefile = file_put_contents(getenv('LANGUAGE_WORKING').'/speech_settings/vo
 sleep(1);
 $myfile = file_put_contents(getenv('LANGUAGE_WORKING').'/speech_in/'.$new_job.'.txt', $data_to_write.PHP_EOL , FILE_APPEND | LOCK_EX);
 
-$seconds_to_wait = $line_counter * 4000000;
+$seconds_to_wait = $line_counter * 40000000;
 
 usleep($seconds_to_wait);
 
