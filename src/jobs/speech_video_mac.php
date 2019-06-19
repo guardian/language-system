@@ -18,6 +18,15 @@ include 'database.php';
 $result = mysqli_query($database, "SELECT id, filename FROM files where id = '".$input1."'");
 $media = mysqli_fetch_array($result);
 
+$lines_count = 0;
+$fhc = fopen(getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input2,'r');
+
+while ($linec = fgets($fhc)) {
+        $lines_count++;
+}
+
+fclose($fhc);
+
 $fh = fopen(getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input2,'r');
 
 $data_to_write ='';
@@ -25,9 +34,13 @@ $data_to_write ='';
 $lines = file(getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input2);//file in to an array
 #echo $lines[1]; //line 2
 $first_run = 1;
-
 $line_counter = 0;
+$count_lines = 0;
 while ($line = fgets($fh)) {
+  $count_lines++;
+  if ($count_lines >= $lines_count) {
+          break;
+  }
   	$line_counter++;
 	if (($line_counter != 1) && ($line_counter != 2)){
 		if(empty(trim($line))) {
