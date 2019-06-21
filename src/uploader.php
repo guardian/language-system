@@ -6,7 +6,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-/* 
+/*
 // Support CORS
 header("Access-Control-Allow-Origin: *");
 // other CORS headers if any...
@@ -49,7 +49,7 @@ $chunk = isset($_REQUEST["chunk"]) ? intval($_REQUEST["chunk"]) : 0;
 $chunks = isset($_REQUEST["chunks"]) ? intval($_REQUEST["chunks"]) : 0;
 
 
-// Remove old temp files	
+// Remove old temp files
 if ($cleanupTargetDir) {
 	if (!is_dir($targetDir) || !$dir = opendir($targetDir)) {
 		die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}');
@@ -69,7 +69,7 @@ if ($cleanupTargetDir) {
 		}
 	}
 	closedir($dir);
-}	
+}
 
 
 // Open temp file
@@ -86,7 +86,7 @@ if (!empty($_FILES)) {
 	if (!$in = @fopen($_FILES["file"]["tmp_name"], "rb")) {
 		die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
 	}
-} else {	
+} else {
 	if (!$in = @fopen("php://input", "rb")) {
 		die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
 	}
@@ -101,20 +101,21 @@ while ($buff = fread($in, 4096)) {
 
 // Check if file has been uploaded
 if (!$chunks || $chunk == $chunks - 1) {
-	// Strip the temp .part suffix off 
+	// Strip the temp .part suffix off
 	rename("{$filePath}.part", $filePath);
-	
+
 	$mediaFileType = pathinfo($filePath,PATHINFO_EXTENSION);
-	
+
 	$mediaType = 'v';
 	if ($mediaFileType == "wav" || $mediaFileType == "WAV" || $mediaFileType == "mp3" || $mediaFileType == "MP3" || $mediaFileType == "aiff" || $mediaFileType == "AIFF") {
 		$mediaType = 'a';
 	}
-	
-	$final_name = str_replace(" ", "_", $fileName);
-        
+
+	$processed_name = str_replace(" ", "_", $fileName);
+	$final_name = preg_replace('/[\x00-\x1F\x7F-\xFF]/', '', $processed_name);
+
     rename($filePath, getenv('LANGUAGE_UPLOADS').'/'.$final_name);
-	
+
 	mysqli_query($database, "INSERT INTO files (filename,extension,type) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."')");
     $lastid = mysqli_insert_id($database);
     if ($mediaType == 'v') {

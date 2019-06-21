@@ -28,15 +28,16 @@ if ($uploadOk == 0) {
 	$mediaType = 'v';
 	if ($mediaFileType == "wav" || $mediaFileType == "WAV" || $mediaFileType == "mp3" || $mediaFileType == "MP3" || $mediaFileType == "aiff" || $mediaFileType == "AIFF") {
 		$mediaType = 'a';
-	} 
+	}
 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        
-        $final_name = str_replace(" ", "_", $_FILES["fileToUpload"]["name"]);
-        
+
+        $processed_name = str_replace(" ", "_", $_FILES["fileToUpload"]["name"]);
+        $final_name = preg_replace('/[\x00-\x1F\x7F-\xFF]/', '', $processed_name);
+
         rename(getenv('LANGUAGE_UPLOADS').'/'.$_FILES["fileToUpload"]["name"], getenv('LANGUAGE_UPLOADS').'/'.$final_name);
-        
+
         mysql_query("INSERT INTO files (filename,extension,type) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."')");
         $lastid = mysql_insert_id();
         if ($mediaType == 'v') {
@@ -44,7 +45,7 @@ if ($uploadOk == 0) {
         }
         header("Location: index.php");
    		exit;
-        
+
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
