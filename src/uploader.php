@@ -6,6 +6,19 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
+function getDuration($filePath)
+{
+    exec(getenv('LANGUAGE_FFMPEG').' -i'." '$filePath' 2>&1 | grep Duration | awk '{print $2}' | tr -d ,",$O,$S);
+    if(!empty($O[0]))
+    {
+        return $O[0];
+    }else
+    {
+        return false;
+    }
+}
+
+
 /*
 // Support CORS
 header("Access-Control-Allow-Origin: *");
@@ -114,9 +127,11 @@ if (!$chunks || $chunk == $chunks - 1) {
 	$processed_name = str_replace(" ", "_", $fileName);
 	$final_name = preg_replace('/[\x00-\x1F\x7F-\xFF]/', '', $processed_name);
 
-    rename($filePath, getenv('LANGUAGE_UPLOADS').'/'.$final_name);
+  rename($filePath, getenv('LANGUAGE_UPLOADS').'/'.$final_name);
 
-	mysqli_query($database, "INSERT INTO files (filename,extension,type) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."')");
+	$duration = getDuration(getenv('LANGUAGE_UPLOADS').'/'.$final_name);
+
+	mysqli_query($database, "INSERT INTO files (filename,extension,type,duration) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."','".$duration."')");
     $lastid = mysqli_insert_id($database);
     if ($mediaType == 'v') {
         exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$final_name.' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');

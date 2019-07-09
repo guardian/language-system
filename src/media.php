@@ -14,7 +14,7 @@
 			include 'database.php';
 			include('session.php');
 			include('jobs.php');
-			$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
+			$result = mysqli_query($database, "SELECT id, filename, extension, type, duration FROM files where id = '".$_GET['id']."'");
 			$media = mysqli_fetch_array($result);
 
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -158,6 +158,43 @@
 			echo '</form>';
 
 			echo '<br /><br />';
+
+			$result2 = mysqli_query($database, "SELECT number FROM settings where name = 'amazon_transcribe_quota'");
+			$amazon_transcribe_quota = mysqli_fetch_array($result2);
+			$result3 = mysqli_query($database, "SELECT number FROM settings where name = 'amazon_transcribe_usage'");
+			$amazon_transcribe_usage = mysqli_fetch_array($result3);
+
+			if ($amazon_transcribe_quota[0] > ($amazon_transcribe_usage[0] + (substr($media[4], 0, 2) * 3600) + (substr($media[4], 3, 2) * 60) + substr($media[4], 6, 2))) {
+				echo '<strong>Machine Transcription (Amazon)</strong><br />';
+
+				echo '<form action="transcribe_amazon.php?id='.$_GET['id'].'" method="POST">';
+
+				echo ' Source Language: <select name="source">';
+				echo '<option value="en-GB">English (British)</option>';
+				echo '<option value="en-US">English (United States of America)</option>';
+				echo '<option value="en-AU">English (Australian)</option>';
+				echo '<option value="en-IN">English (Indian)</option>';
+				echo '<option value="fr-FR">French</option>';
+				echo '<option value="fr-CA">French (Canadian)</option>';
+				echo '<option value="de-DE">German</option>';
+				echo '<option value="it-IT">Italian</option>';
+				echo '<option value="es-ES">Spanish</option>';
+				echo '<option value="es-US">Spanish (United States of America)</option>';
+				echo '<option value="pt-BR">Portuguese</option>';
+				echo '<option value="ar-SA">Arabic</option>';
+				echo '<option value="hi-IN">Hindi</option>';
+				echo '<option value="ko-KR">Korean</option>';
+				echo '</select>';
+
+				echo '<input type="submit" value="Transcribe">';
+
+				echo '</form>';
+
+				echo '<br /><br />';
+			} else {
+				echo 'Amazon Transcibe is not avalible for this item because the quota would be exceeded.';
+				echo '<br /><br /><br />';
+			}
 
 			echo '<strong>Machine Translation</strong><br />';
 
@@ -597,6 +634,21 @@
 					if (($file != '.') && ($file != '..')) {
 						if (substr($file, -4) == '.srt') {
 							echo '<a href="'.getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
+						}
+					}
+				}
+				echo '<br /><br />';
+			}
+
+			if (file_exists(getenv('LANGUAGE_JSON').'/'.$_GET['id'])) {
+
+				echo '<strong>Amazon Transcribe Files</strong><br />';
+
+				$files = scandir(getenv('LANGUAGE_JSON').'/'.$_GET['id']);
+				foreach($files as $file) {
+					if (($file != '.') && ($file != '..')) {
+						if (substr($file, -5) == '.json') {
+							echo '<a href="'.getenv('LANGUAGE_JSON').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
 						}
 					}
 				}
