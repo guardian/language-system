@@ -5,8 +5,11 @@ A system that uses third party software to automatically convert audio to text, 
 **Requirements**
 
 Apache HTTP Server
+
 PHP
+
 MySQL Server
+
 A World Wide Web browser
 
 **Functions**
