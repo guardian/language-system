@@ -7,6 +7,7 @@ A system that uses third party software to automatically convert audio to text, 
 - Apache HTTP Server
 - PHP
 - MySQL Server
+- FFmpeg
 - A World Wide Web browser
 
 **Functions**
