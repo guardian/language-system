@@ -4,13 +4,10 @@ A system that uses third party software to automatically convert audio to text, 
 
 **Requirements**
 
-Apache HTTP Server
-
-PHP
-
-MySQL Server
-
-A World Wide Web browser
+- Apache HTTP Server
+- PHP
+- MySQL Server
+- A World Wide Web browser
 
 **Functions**
 
@@ -18,4 +15,4 @@ A World Wide Web browser
 2. Translate subtitle files from one language to another in around seventy languages.
 3. Machine speech rendering to video or audio with pronunciation dictionaries for around fifty languages.
 4. Subtitle rendering to video with support for about twenty writing systems.
-5. Allows the user to upload subtitle files in the SRT format for use with the system. 
+5. Allows the user to upload subtitle files in the SRT format for use with the system.
