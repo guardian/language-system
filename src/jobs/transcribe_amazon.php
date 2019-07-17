@@ -126,12 +126,14 @@ if ($job_status == 'completed') {
       $sentence .= $aws_json_data->results->items[$i]->alternatives[0]->content." ";
       $t++;
     } elseif ($aws_json_data->results->items[$i]->type == "punctuation" && $aws_json_data->results->items[$i]->alternatives[0]->content == ".") {
-      $srt .= $n."\n";
-      $srt .= formatTime($start_time)." --> ".formatTime($end_time)."\n".$sentence."\n\n";
-      $sentence = "";
-      $start_time = "";
-      $n++;
-      $t = 1;
+      if ($sentence != '') {
+        $srt .= $n."\n";
+        $srt .= formatTime($start_time)." --> ".formatTime($end_time)."\n".$sentence."\n\n";
+        $sentence = "";
+        $start_time = "";
+        $n++;
+        $t = 1;
+      }
     }
     if ($t > $wtb) {
       $srt .= $n."\n";
