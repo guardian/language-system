@@ -4,10 +4,13 @@ A system that uses third party software to automatically convert audio to text, 
 
 **Requirements**
 
+- Linux
 - Apache HTTP Server
 - PHP
 - MySQL Server
 - FFmpeg
+- Autosub
+- eSpeak
 - A World Wide Web browser
 
 **Functions**
