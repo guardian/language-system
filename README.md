@@ -11,7 +11,16 @@ A system that uses third party software to automatically convert audio to text, 
 - FFmpeg
 - Autosub
 - eSpeak
+- Composer
+- Google Translate PHP
+- Plupload
 - A World Wide Web browser
+
+**Requirements for Optional Elements**
+
+- macOS
+- AWS SDK for PHP
+- An Amazon Web Services account
 
 **Functions**
 
