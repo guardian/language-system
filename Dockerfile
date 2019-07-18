@@ -31,4 +31,5 @@ RUN mkdir renders
 RUN mkdir uploads
 RUN mkdir thumbnails
 RUN mkdir json
+RUN mkdir text
 RUN chmod 0777 *

@@ -633,7 +633,7 @@
 				foreach($files as $file) {
 					if (($file != '.') && ($file != '..')) {
 						if (substr($file, -4) == '.srt') {
-							echo '<a href="'.getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
+							echo '<a href="'.getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a> <a href="text.php?id='.$_GET['id'].'&file='.$file.'">(Convert to text)</a><br />';
 						}
 					}
 				}
@@ -649,6 +649,21 @@
 					if (($file != '.') && ($file != '..')) {
 						if (substr($file, -5) == '.json') {
 							echo '<a href="'.getenv('LANGUAGE_JSON').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
+						}
+					}
+				}
+				echo '<br /><br />';
+			}
+
+			if (file_exists(getenv('LANGUAGE_TEXT').'/'.$_GET['id'])) {
+
+				echo '<strong>Text Files</strong><br />';
+
+				$files = scandir(getenv('LANGUAGE_TEXT').'/'.$_GET['id']);
+				foreach($files as $file) {
+					if (($file != '.') && ($file != '..')) {
+						if (substr($file, -4) == '.txt') {
+							echo '<a href="'.getenv('LANGUAGE_TEXT').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
 						}
 					}
 				}
