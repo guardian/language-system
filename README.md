@@ -63,30 +63,55 @@ A system that uses third party software to automatically convert audio to text, 
 
 15. Set the following environment variables to be read by Apache HTTP Server. On openSUSE the file to do this in is /usr/lib/systemd/system/apache2.service in the Service block.
   - DATABASE_HOST=localhost
+
     Where localhost is the host name of your database server.
+
   - DATABASE_USER=ls
+
     Where ls is the user name for the MySQL account for Language System to use.
+
   - DATABASE_PASSWORD=langsyspass
+
     Where langsyspass is the password for the MySQL account for Language System to use.
+
   - LANGUAGE_UPLOADS=uploads
+
     Where uploads is the path to the folder for media files to be stored relative to the folder you installed Language System in.
+
   - LANGUAGE_RENDERS=renders
+
     Where renders is the path to the folder for renders to be stored relative to the folder you installed Language System in.
+
   - LANGUAGE_THUMBNAILS=thumbnails
+
     Where thumbnails is the path to the folder for thumbnails to be stored relative to the folder you installed Language System in.
+
   - LANGUAGE_SUBTITLES=subtitles
+
     Where subtitles is the path to the folder for subtitles to be stored relative to the folder you installed Language System in.
+
   - LANGUAGE_WORKING=working
+
     Where working is the path to the folder for Language System to use as a working folder relative to the folder you installed Language System in.
+
   - LANGUAGE_JSON=json
+
     Where json is the path to the folder for JSON files to be stored relative to the folder you installed Language System in.
+
   - LANGUAGE_TEXT=text
+
     Where text is the path to the folder for text files to be stored relative to the folder you installed Language System in.
+
   - LANGUAGE_FFMPEG=ffmpeg
+
     Where ffmpeg is the path to your FFmpeg executable.
+
   - LANGUAGE_AWS_REGION=eu-west-1
+
     Where eu-west-1 is the AWS region you want to do your AWS processing in. Can be ignored if you are not using AWS.
+
   - LANGUAGE_AWS_BUCKET=bucket-name
+
     Where bucket-name is the S3 bucket you want to do your AWS processing in. Can be ignored if you are not using AWS.
 
 16. Make sure all the folders you just told the system to use with environment variables exist and are readable and writeable by the user Apache HTTP Server runs as.
