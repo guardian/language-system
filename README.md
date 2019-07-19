@@ -116,4 +116,14 @@ A system that uses third party software to automatically convert audio to text, 
 
 16. Make sure all the folders you just told the system to use with environment variables exist and are readable and writeable by the user Apache HTTP Server runs as.
 
-17. Start or restart Apache HTTP Server so it can load the environment variables.
+17. Make sure the following lines are in your PHP configuration file. A sample PHP configuration file is included at setup/php.ini
+    ```
+    post_max_size = 3500M
+    max_execution_time = 300
+    max_input_time = 300
+    memory_limit = 512M
+    file_uploads = On
+    upload_max_filesize = 35000M
+    ```
+
+18. Start or restart Apache HTTP Server so it can load the environment variables.
