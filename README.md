@@ -136,6 +136,6 @@ If you installed Language System on your workstation in a folder called ls below
 
 If you installed Language System on a machine with the domain name machine.domain.org in the document root of Apache HTTP Server then the correct URL would be http://machine.domain.org/
 
-Access the URL. You should be prompted for a user name and password. Enter the default user name 'guest' and the default password 'language' and Submit.
+Access the URL. You should be prompted for a user name and password. Enter the default user name 'guest' and the default password 'language' and click on Submit.
 
 At this point you should see the Language System main index page.
