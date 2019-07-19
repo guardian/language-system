@@ -127,3 +127,15 @@ A system that uses third party software to automatically convert audio to text, 
     ```
 
 18. Start or restart Apache HTTP Server so it can load the environment variables.
+
+**Accessing the System**
+
+Open a World Wide Web browser. Type a URL suitable to access your Language System installation.
+
+If you installed Language System on your workstation in a folder called ls below the document root of Apache HTTP Server then the correct URL would be http://localhost/ls/
+
+If you installed Language System on a machine with the domain name machine.domain.org in the document root of Apache HTTP Server then the correct URL would be http://machine.domain.org/
+
+Access the URL. You should be prompted for a user name and password. Enter the default user name 'guest' and the default password 'language' and Submit.
+
+At this point you should see the Language System main index page.
