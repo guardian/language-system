@@ -143,3 +143,11 @@ At this point you should see the Language System main index page.
 **Uploading a Media File**
 
 Click on Select files. Choose a suitable media file to add to the system. MP3, MP4, MPG, MXF, MOV, AIFF, and WAV files are supported. Click on Upload files. After the percentage display next to the file name reads 100% you can reload the page. You should see a link to your file as text and a thumbnail graphic.
+
+**Accessing a Media File**
+
+Go to the Language System main index page. You should see links to up to sixteen media files that are in the system. If the media file you want to access it not linked on the first page, click on Next > until you see a link to that file. When a link to the media file you want to access it on screen click on it. At this point your browser should load a media page for your file.
+
+**Transcribing Subtitles**
+
+Go to the media page for the file you want to process. Find the Machine Transcription section. Select the language that the file contains. Click on Transcribe. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to an SRT file under the heading Subtitles.
