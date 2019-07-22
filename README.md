@@ -139,3 +139,7 @@ If you installed Language System on a machine with the domain name machine.domai
 Access the URL. You should be prompted for a user name and password. Enter the default user name 'guest' and the default password 'language' and click on Submit.
 
 At this point you should see the Language System main index page.
+
+**Uploading a Media File**
+
+Click on Select files. Choose a suitable media file to add to the system. MP3, MP4, MPG, MXF, MOV, AIFF, and WAV files are supported. Click on Upload files. After the percentage display next to the file name reads 100% you can reload the page. You should see a link to your file as text and a thumbnail graphic.
