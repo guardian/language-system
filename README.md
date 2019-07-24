@@ -155,3 +155,7 @@ Go to the media page for the file you want to process. Find the Machine Transcri
 **Translating Subtitles**
 
 Go to the media page for the file you want to process subtitles for. Find the Machine Translation section. Select the subtitle file you want to process from the menu. From the Source menu, select the language that the subtitle file contains. From the Target menu, select the language you want the subtitles translated into. Click on Translate. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to a new SRT file under the heading Subtitles. The file will have an abbreviation for the name of the language it was translated into at the start of the file name.
+
+**Rendering Speech to an Audio File**
+
+Go to the media page for the file you want to process. Find the Machine Speech section. Select the subtitle file you want to use from the menu. From the Language menu, select the language that the subtitle file contains. Click on Render to Audio. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to a new Wave file under the heading Renders.
