@@ -159,3 +159,7 @@ Go to the media page for the file you want to process subtitles for. Find the Ma
 **Rendering Speech to an Audio File**
 
 Go to the media page for the file you want to process. Find the Machine Speech section. Select the subtitle file you want to use from the menu. From the Language menu, select the language that the subtitle file contains. Click on Render to Audio. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to a new Wave file under the heading Renders.
+
+**Rendering Speech to a Video File**
+
+Go to the media page for the file you want to process. Find the Machine Speech section. Select the subtitle file you want to use from the menu. From the Language menu, select the language that the subtitle file contains. Click on Render to Video. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to a new video file under the heading Renders.
