@@ -166,4 +166,8 @@ Go to the media page for the file you want to process. Find the Machine Speech s
 
 **Rendering Subtitles to a Video File**
 
-Go to the media page for the file you want to process. Find the Machine Speech section. Select the subtitle file you want to use from the menu. From the Language menu, select the language that the subtitle file contains. Click on Render to Video. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to a new video file under the heading Renders.
+Go to the media page for the file you want to render subtitles for. Find the Subtitle Rendering section. Select the subtitle file you want to use from the menu. Click on Render. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to a new video file under the heading Renders.
+
+**Uploading a Subtitle File**
+
+Go to the media page for the file you want to upload subtitles for. Find the Subtitle Upload section. Click on Browse. Choose a subtitle file in the SRT format. Click on Upload Subtitles. After the page reloads, you should see a link to a new SRT file under the heading Subtitles.
