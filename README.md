@@ -29,6 +29,7 @@ A system that uses third party software to automatically convert audio to text, 
 3. Machine speech rendering to video or audio with pronunciation dictionaries for around fifty languages.
 4. Subtitle rendering to video with support for about twenty writing systems.
 5. Allows the user to upload subtitle files in the SRT format for use with the system.
+6. Convert a subtitle file in the SRT format to a plain text file.
 
 **Installation and Set Up**
 
@@ -171,3 +172,7 @@ Go to the media page for the file you want to render subtitles for. Find the Sub
 **Uploading a Subtitle File**
 
 Go to the media page for the file you want to upload subtitles for. Find the Subtitle Upload section. Click on Browse. Choose a subtitle file in the SRT format. Click on Upload Subtitles. After the page reloads, you should see a link to a new SRT file under the heading Subtitles.
+
+**Converting a Subtile File to a Text File**
+
+Go to the media page for the file you want to process subtitles for. Find the Subtitles section. Find the subtitle file you want to convert in the list and click on the Convert to text link which is on the same line as it. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to a new text file under the heading Text Files.
