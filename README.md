@@ -147,7 +147,7 @@ A system that uses third party software to automatically convert audio to text, 
 
 4. Save the file and make sure it is readable by the user Apache HTTP Server runs as.
 
-Your language system installation should now me able to access Amazon Transcribe. The system has a quota to avoid excessive cost. By default, it is set to two million seconds. If you want to change this setting, access your database, go to the settings table and change the value of number in row one to you desired number of seconds.
+Your language system installation should now be able to access Amazon Transcribe. The system has a quota to avoid excessive cost. By default, it is set to two million seconds. If you want to change this setting, access your database, go to the settings table and change the value of number in row one to you desired number of seconds.
 
 **Accessing the System**
 
