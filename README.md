@@ -149,6 +149,36 @@ A system that uses third party software to automatically convert audio to text, 
 
 Your language system installation should now be able to access Amazon Transcribe. The system has a quota to avoid excessive cost. By default, it is set to two million seconds. If you want to change this setting, access your database, go to the settings table and change the value of number in row one to you desired number of seconds.
 
+**Installation and Set Up of macOS Speech Rendering (Optional)**
+
+For this you will need a machine running macOS.
+
+1. Open System Preferences.
+
+2. Open Dictation & Speech.
+
+3. Click on Text to Speech.
+
+4. Click on the System Voice menu and select Customize.
+
+5. Install one or more of following voices: Kate, Serena, Daniel, Fiona, Moira, Veena, Karen, Tessa, Allison, Ava, Samantha, Susan, Ting-Ting, Sin-ja, Mei-Jia, Audrey, Aurelie, Anna, Markus, Petra, Yannick, Lekha, Kyoko, Otoya, Katya, Milena, Jorge, and Monica.
+
+6. Make sure your Language System working folder is shared with the machine running macOS.
+
+7. Create folders called 'speech_in', 'speech_out', and 'speech_settings' in your Language System working folder. Make sure the new folders are readable and writeable by the user Apache HTTP Server runs as and are accessible on the machine running macOS.
+
+8. On the machine running macOS, copy Render_Speech_from_Text.scpt from the macOS folder to /Library/Scripts/Folder Action Scripts
+
+9. Open Render_Speech_from_Text.scpt
+
+10. Where you see /Path/ replace that with the path to the working folder and save the file.
+
+11. Go to Finder. Open the working folder.
+
+12. Right click on speech_in, select Services, and click on Folder Actions Setup.
+
+13. Select Render_Speech_from_Text.scpt from the menu and click on Attach.
+
 **Accessing the System**
 
 Open a World Wide Web browser. Type a URL suitable to access your Language System installation.
