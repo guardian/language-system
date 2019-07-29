@@ -18,7 +18,7 @@ A system that uses third party software to automatically convert audio to text, 
 
 **Requirements for Optional Elements**
 
-- macOS
+- [macOS](https://www.apple.com/macos/)
 - [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/)
 - An [Amazon Web Services](https://aws.amazon.com/) account
 
