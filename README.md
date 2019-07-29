@@ -141,7 +141,6 @@ A system that uses third party software to automatically convert audio to text, 
     aws_access_key_id = YOURACCESSKEYGOESHERE
     aws_secret_access_key = YOURSECRETACCESSKEYGOESHERE
     region=eu-west-1
-
     ```
 
     Where YOURACCESSKEYGOESHERE is your AWS access key, YOURSECRETACCESSKEYGOESHERE is your AWS secret access key, and eu-west-1 is the AWS region you want to do your processing in.
