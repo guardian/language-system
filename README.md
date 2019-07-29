@@ -161,7 +161,7 @@ For this you will need a machine running macOS.
 
 4. Click on the System Voice menu and select Customize.
 
-5. Install one or more of following voices: Kate, Serena, Daniel, Fiona, Moira, Veena, Karen, Tessa, Allison, Ava, Samantha, Susan, Ting-Ting, Sin-ja, Mei-Jia, Audrey, Aurelie, Anna, Markus, Petra, Yannick, Lekha, Kyoko, Otoya, Katya, Milena, Jorge, and Monica.
+5. Install one or more of the following voices: Kate, Serena, Daniel, Fiona, Moira, Veena, Karen, Tessa, Allison, Ava, Samantha, Susan, Ting-Ting, Sin-ja, Mei-Jia, Audrey, Aurelie, Anna, Markus, Petra, Yannick, Lekha, Kyoko, Otoya, Katya, Milena, Jorge, and Monica.
 
 6. Make sure your Language System working folder is shared with the machine running macOS.
 
