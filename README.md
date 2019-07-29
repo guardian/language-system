@@ -182,13 +182,23 @@ Go to the media page for the file you want to process subtitles for. Find the Su
 The job list page shows information about jobs that have been started on the system. To get to it click on Jobs link which can be found at the top of the main index page and media pages. The job information is organized in a table with the following headings: -
 
 Id.: The identification number of the job.
+
 Name: The name of the job.
+
 Type: The type of the job.
+
 User: The user who started the job.
+
 Start (UNIX): The UNIX time in seconds that the job was started on.
+
 End (UNIX): If the job has finished, the UNIX time in seconds that the job ended on.
+
 Start (Human Friendly): The time and date that the job was started on displayed in a more easily readable format.
+
 End (Human Friendly): If the job has finished, the time and date that the job ended on displayed in a more easily readable format.
+
 Status: The current status of the job.
+
 Input 1-8: Strings that where sent to the job code.
+
 Output 1-8: Strings that the job outputted.
