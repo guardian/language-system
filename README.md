@@ -176,3 +176,19 @@ Go to the media page for the file you want to upload subtitles for. Find the Sub
 **Converting a Subtile File to a Text File**
 
 Go to the media page for the file you want to process subtitles for. Find the Subtitles section. Find the subtitle file you want to convert in the list and click on the Convert to text link which is on the same line as it. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to a new text file under the heading Text Files.
+
+**The Job List Page**
+
+The job list page shows information about jobs that have been started on the system. To get to it click on Jobs link which can be found at the top of the main index page and media pages. The job information is organized in a table with the following headings: -
+
+Id.: The identification number of the job.
+Name: The name of the job.
+Type: The type of the job.
+User: The user who started the job.
+Start (UNIX): The UNIX time in seconds that the job was started on.
+End (UNIX): If the job has finished, the UNIX time in seconds that the job ended on.
+Start (Human Friendly): The time and date that the job was started on displayed in a more easily readable format.
+End (Human Friendly): If the job has finished, the time and date that the job ended on displayed in a more easily readable format.
+Status: The current status of the job.
+Input 1-8: Strings that where sent to the job code.
+Output 1-8: Strings that the job outputted.
