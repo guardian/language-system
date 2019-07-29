@@ -19,8 +19,8 @@ A system that uses third party software to automatically convert audio to text, 
 **Requirements for Optional Elements**
 
 - macOS
-- AWS SDK for PHP
-- An Amazon Web Services account
+- [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/)
+- An [Amazon Web Services](https://aws.amazon.com/) account
 
 **Functions**
 
@@ -128,6 +128,27 @@ A system that uses third party software to automatically convert audio to text, 
     ```
 
 18. Start or restart Apache HTTP Server so it can load the environment variables.
+
+**Installation and Set Up of Amazon Transcribe Integration (Optional)**
+
+1. Install [AWS SDK for PHP](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/getting-started_installation.html).
+
+2. On the machine that Apache HTTP Server is running on, create a text file at /.aws/credentials
+
+3. In /.aws/credentials enter the following: -
+    ```
+    [default]
+    aws_access_key_id = YOURACCESSKEYGOESHERE
+    aws_secret_access_key = YOURSECRETACCESSKEYGOESHERE
+    region=eu-west-1
+
+    ```
+
+    Where YOURACCESSKEYGOESHERE is your AWS access key, YOURSECRETACCESSKEYGOESHERE is your AWS secret access key, and eu-west-1 is the AWS region you want to do your processing in.
+
+4. Save the file and make sure it is readable by the user Apache HTTP Server runs as.
+
+Your language system installation should now me able to access Amazon Transcribe. The system has a quota to avoid excessive cost. By default, it is set to two million seconds. If you want to change this setting, access your database, go to the settings table and change the value of number in row one to you desired number of seconds.
 
 **Accessing the System**
 
