@@ -38,16 +38,17 @@ while ($line = fgets($fh)) {
 	} else {
 		$data_to_write .= $line;
 	}
-	
+
 }
 fclose($fh);
 
 $myfile = file_put_contents(getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input4.'_'.$input2, $data_to_write.PHP_EOL , FILE_APPEND | LOCK_EX);
 
 $output = getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input4.'_'.$input2;
+$output2 = $input4.'_'.$input2;
 
 //End of job code
 
-finish_job($new_job,'Succeeded',$output);
+finish_job($new_job,'Succeeded',$output,$output2);
 
 ?>

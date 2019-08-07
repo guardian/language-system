@@ -602,6 +602,31 @@
 				echo '<br /><br />';
 			}
 
+			echo '<strong>Complex Jobs</strong><br />';
+
+			echo '<form action="complex.php?id='.$_GET['id'].'" method="POST">';
+			echo '<select name="job">';
+			$result4 = mysqli_query($database, "SELECT DISTINCT name FROM complex");
+			while ($row = mysqli_fetch_array($result4, MYSQLI_NUM)) {
+				echo "<option value='".$row[0]."'>".$row[0]."</option>";
+			}
+			echo '</select>';
+			echo ' Subtitles:<select name="subtitles">';
+			$dir    = 'subtitles/'.$_GET['id'];
+			$files1 = scandir($dir);
+
+			foreach ($files1 as $file) {
+				if (($file != '.') && ($file != '..')) {
+					if (substr($file, -4) == '.srt') {
+						echo '<option value="'.$file.'">'.$file.'</option>';
+					}
+				}
+			}
+			echo '</select>';
+			echo '<input type="submit" value="Run">';
+			echo '</form>';
+			echo '<br /><br />';
+
 			echo '<strong>Subtitle Upload</strong><br />';
 			echo '<form action="uploadsubtitles.php?id='.$_GET['id'].'" method="post" enctype="multipart/form-data">';
     		?>Select subtitles to upload:

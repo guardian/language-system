@@ -23,14 +23,15 @@ chmod(getenv('LANGUAGE_SUBTITLES').'/'.$input1, 0777);
 exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
 exec('autosub -F srt -S '.$input2.' -D '.$input2.' -o '.getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$media[1].'.srt  '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3', $exec_output, $exec_result);
 $output = getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$media[1].'.srt';
+$output2 = $media[1].'.srt';
 unlink(getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
 
 //End of job code
 
 if ($exec_result == 0) {
-	finish_job($new_job,'Succeeded',$output);
+	finish_job($new_job,'Succeeded',$output,$output2);
 } else {
 	finish_job($new_job,'Failed');
-} 
+}
 
 ?>
