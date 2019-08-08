@@ -606,7 +606,7 @@
 
 			echo '<form action="complex_start.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="job">';
-			$result4 = mysqli_query($database, "SELECT DISTINCT name FROM complex");
+			$result4 = mysqli_query($database, "SELECT DISTINCT name FROM complex ORDER BY name");
 			while ($row = mysqli_fetch_array($result4, MYSQLI_NUM)) {
 				echo "<option value='".$row[0]."'>".$row[0]."</option>";
 			}
