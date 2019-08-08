@@ -604,7 +604,7 @@
 
 			echo '<strong>Complex Jobs</strong><br />';
 
-			echo '<form action="complex.php?id='.$_GET['id'].'" method="POST">';
+			echo '<form action="complex_start.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="job">';
 			$result4 = mysqli_query($database, "SELECT DISTINCT name FROM complex");
 			while ($row = mysqli_fetch_array($result4, MYSQLI_NUM)) {
