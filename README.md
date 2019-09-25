@@ -28,8 +28,9 @@ A system that uses third party software to automatically convert audio to text, 
 2. Translate subtitle files from one language to another in around seventy languages.
 3. Machine speech rendering to video or audio with pronunciation dictionaries for around fifty languages.
 4. Subtitle rendering to video with support for about twenty writing systems.
-5. Allows the user to upload subtitle files in the SRT format for use with the system.
-6. Convert a subtitle file in the SRT format to a plain text file.
+5. Run complex jobs that chain two or more tasks together.
+6. Allows the user to upload subtitle files in the SRT format for use with the system.
+7. Convert a subtitle file in the SRT format to a plain text file.
 
 **Installation and Set Up**
 
@@ -230,6 +231,10 @@ Go to the media page for the file you want to process. Find the Machine Speech (
 **Rendering Subtitles to a Video File**
 
 Go to the media page for the file you want to render subtitles for. Find the Subtitle Rendering section. Select the subtitle file you want to use from the menu. Click on Render. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again. If the job was successful you should see a link to a new video file under the heading Renders.
+
+**Running a Complex Job**
+
+Go to the media page for the file you want to run a complex job for. Find the Complex Jobs section. Select the job you want to run from the menu. If the job requires a subtitle file to work on, select a file from the subtitles menu. Click on Run. At this point you should get forwarded to a job information page which tells you about the job you have just started. When the job finishes, the media page should display again.
 
 **Uploading a Subtitle File**
 
