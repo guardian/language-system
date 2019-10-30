@@ -48,3 +48,8 @@ label {
 .box {
 	border:#666666 solid 1px;
 }
+
+a.complex {
+  color: #000000;
+  text-decoration: none;
+}
