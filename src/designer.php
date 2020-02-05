@@ -43,6 +43,11 @@
 					$sql = "INSERT INTO complex (name,step) VALUES ('".$_GET['name']."','".($data['total']+1)."')";
 					mysqli_query($database, $sql);
 				}
+				if($_POST['Sub'] == 'Delete Job') {
+					$sql = "DELETE FROM complex WHERE name='".$_GET['name']."'";
+					mysqli_query($database, $sql);
+					header('Location: designer_menu.php');
+				}
 			}
 
 			include('navigation.php');
@@ -172,6 +177,10 @@
 			<br />
 			<form action="" method="POST">
 				<input type="submit" name="Sub" value="New Step">
+			</form>
+			<br /><br /><br />
+			<form action="" method="POST">
+				<input type="submit" name="Sub" value="Delete Job">
 			</form>
 		</font>
 	</body>
