@@ -133,8 +133,10 @@ if (!$chunks || $chunk == $chunks - 1) {
 
 	mysqli_query($database, "INSERT INTO files (filename,extension,type,duration) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."','".$duration."')");
     $lastid = mysqli_insert_id($database);
+    mkdir($targetDir.'/'.$lastid);
+    rename($targetDir.'/'.$final_name, $targetDir.'/'.$lastid.'/'.$final_name);
     if ($mediaType == 'v') {
-        exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$final_name.' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');
+        exec(getenv('LANGUAGE_FFMPEG').' -i '.$targetDir.'/'.$lastid.'/'.$final_name.' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');
     }
 }
 

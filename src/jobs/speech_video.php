@@ -43,20 +43,20 @@ while ($line = fgets($fh)) {
 		$time_one = (intval(substr($line, 3, 2)) * 60000) + $time_one;
 		$time_one = (intval(substr($line, 6, 2)) * 1000) + $time_one;
 		$time_one = intval(substr($line, 9, 3)) + $time_one;
-		
+
 		if ($first_run == 1) {
 			$first_run = 0;
 		} else {
 			$data_to_write .= '<break time="'.($time_one - $time_two).'ms" />';
 		}
-		
+
 		$time_two = intval(substr($line, 17, 2)) * 3600000;
 		$time_two = (intval(substr($line, 20, 2)) * 60000) + $time_two;
 		$time_two = (intval(substr($line, 23, 2)) * 1000) + $time_two;
 		$time_two = intval(substr($line, 26, 3)) + $time_two;
-		
+
 	}
-	
+
 }
 fclose($fh);
 
@@ -76,7 +76,7 @@ $number_found = 0;
 
 if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1])) {
 
-	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.wav -acodec aac -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1], $exec_output, $result);
+	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$input1.'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.wav -acodec aac -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1], $exec_output, $result);
 
 	$output = getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1];
 } else {
@@ -86,8 +86,8 @@ if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1])) {
 			$number_found = 1;
 		}
 	}
-	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.wav -acodec aac -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$render_number.'_'.$media[1], $exec_output, $result);
-	
+	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$input1.'/'.$media[1].' -itsoffset '.substr($lines[1], 0, 2).':'.substr($lines[1], 3, 2).':'.substr($lines[1], 6, 2).' -i '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.wav -acodec aac -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$render_number.'_'.$media[1], $exec_output, $result);
+
 	$output = getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$render_number.'_'.$media[1];
 }
 
@@ -101,6 +101,6 @@ if ($result == 0) {
 	finish_job($new_job,'Succeeded',$output);
 } else {
 	finish_job($new_job,'Failed');
-} 
+}
 
 ?>

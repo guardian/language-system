@@ -40,7 +40,7 @@ include 'database.php';
 $result = mysqli_query($database, "SELECT id, filename, duration FROM files where id = '".$input1."'");
 $media = mysqli_fetch_array($result);
 
-exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -vn -sn -c:a mp3 -ab 192k '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
+exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$input1.'/'.$media[1].' -vn -sn -c:a mp3 -ab 192k '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
 
 mkdir(getenv('LANGUAGE_SUBTITLES').'/'.$input1);
 chmod(getenv('LANGUAGE_SUBTITLES').'/'.$input1, 0777);

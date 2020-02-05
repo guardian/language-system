@@ -95,7 +95,7 @@ $number_found = 0;
 
 if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1])) {
 
-	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -i '.getenv('LANGUAGE_WORKING').'/speech_out/'.$new_job.'.txt.aiff -acodec aac -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1], $exec_output, $result);
+	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$input1.'/'.$media[1].' -i '.getenv('LANGUAGE_WORKING').'/speech_out/'.$new_job.'.txt.aiff -acodec aac -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1], $exec_output, $result);
 
 	$output = getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1];
 } else {
@@ -105,7 +105,7 @@ if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$media[1])) {
 			$number_found = 1;
 		}
 	}
-	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$media[1].' -i '.getenv('LANGUAGE_WORKING').'/speech_out/'.$new_job.'.txt.aiff -acodec aac -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$render_number.'_'.$media[1], $exec_output, $result);
+	exec(getenv('LANGUAGE_FFMPEG').' -y -i '.getenv('LANGUAGE_UPLOADS').'/'.$input1.'/'.$media[1].' -i '.getenv('LANGUAGE_WORKING').'/speech_out/'.$new_job.'.txt.aiff -acodec aac -vcodec copy -map 0:0 -map 1:0 '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$render_number.'_'.$media[1], $exec_output, $result);
 
 	$output = getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$render_number.'_'.$media[1];
 }

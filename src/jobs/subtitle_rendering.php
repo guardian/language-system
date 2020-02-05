@@ -25,10 +25,10 @@ $number_found = 0;
 
 if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$input2)) {
 
-	exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$input2.' -vf subtitles='.getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input3.' '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$input2, $exec_output, $result);
-	
+	exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$input1.'/'.$input2.' -vf subtitles='.getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input3.' '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$input2, $exec_output, $result);
+
 	$output = getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$input2;
-	
+
 } else {
 	while ($number_found == 0) {
 		$render_number++;
@@ -36,8 +36,8 @@ if (!file_exists(getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$input2)) {
 			$number_found = 1;
 		}
 	}
-	exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$input2.' -vf subtitles='.getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input3.' '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$render_number.'_'.$input2, $exec_output, $result);
-	
+	exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$input1.'/'.$input2.' -vf subtitles='.getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input3.' '.getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$render_number.'_'.$input2, $exec_output, $result);
+
 	$output = getenv('LANGUAGE_RENDERS').'/'.$input1.'/'.$render_number.'_'.$input2;
 }
 
@@ -47,5 +47,5 @@ if ($result == 0) {
 	finish_job($new_job,'Succeeded',$output);
 } else {
 	finish_job($new_job,'Failed');
-} 
+}
 ?>

@@ -43,11 +43,11 @@
 			} else {
 				if (($media[2] == 'wav') || ($media[2] == 'WAV') || ($media[2] == 'mp3') || ($media[2] == 'MP3')) {
 					echo '<video width="512" height="48" controls>';
-  					echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$media[1].'" type="video/mp4">';
+  					echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$_GET['id'].'/'.$media[1].'" type="video/mp4">';
 					echo '</video>';
 				} else {
 					echo '<video width="512" height="512" controls>';
-  					echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$media[1].'" type="video/mp4">';
+  					echo '<source src="'.getenv('LANGUAGE_UPLOADS').'/'.$_GET['id'].'/'.$media[1].'" type="video/mp4">';
 					echo '</video>';
 				}
 			}
