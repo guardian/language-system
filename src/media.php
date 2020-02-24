@@ -39,7 +39,11 @@
 			if (($media[2] == 'mov') || ($media[2] == 'mxf') || ($media[2] == 'MOV') || ($media[2] == 'MXF')) {
 				echo '<img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$_GET['id'].'.png">';
 			} elseif (($media[2] == 'aiff') || ($media[2] == 'AIFF')) {
-				echo '<img height="200" src="images/audio.png">';
+				if (file_exists(getenv('LANGUAGE_THUMBNAILS').'/'.$_GET['id'].'.png')){
+					echo '<img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$_GET['id'].'.png">';
+				} else {
+					echo '<img height="200" src="images/audio.png">';
+				}
 			} else {
 				if (($media[2] == 'wav') || ($media[2] == 'WAV') || ($media[2] == 'mp3') || ($media[2] == 'MP3')) {
 					echo '<video width="512" height="48" controls>';
