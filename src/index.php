@@ -56,6 +56,8 @@
 				echo '<br />';
 				if ($row[3] == 'v') {
 					echo '<a href="media.php?id='.$row[0].'"><img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$row[0].'.png"></a>';
+				} elseif (file_exists(getenv('LANGUAGE_THUMBNAILS').'/'.$row[0].'.png')){
+					echo '<a href="media.php?id='.$row[0].'"><img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$row[0].'.png"></a>';
 				} else {
 					echo '<a href="media.php?id='.$row[0].'"><img height="200" src="images/audio.png"></a>';
 				}
