@@ -14,6 +14,7 @@ A system that uses third party software to automatically convert audio to text, 
 - [Composer](https://getcomposer.org/)
 - [Google Translate PHP](https://github.com/Stichoza/google-translate-php)
 - [Plupload](https://www.plupload.com/)
+- [JustWave](https://justwave.beotiger.com/)
 - A World Wide Web browser
 
 **Requirements for Optional Elements**
@@ -55,15 +56,18 @@ A system that uses third party software to automatically convert audio to text, 
 
 10. Install [Plupload](https://www.plupload.com/).
 
-11. Clone the Git repository of Language System to a folder that is served by Apache HTTP Server.
+11. Install [JustWave](https://justwave.beotiger.com/).
+  - Run `cd /opt` then `git clone https://github.com/beotiger/justwave.git`
 
-12. Create a MySQL user for Language System to use.
+12. Clone the Git repository of Language System to a folder that is served by Apache HTTP Server.
 
-13. Create a MySQL schema called 'language_system' and give the user you just made full access to it.
+13. Create a MySQL user for Language System to use.
 
-14. Install the database SQL files from the database folder.
+14. Create a MySQL schema called 'language_system' and give the user you just made full access to it.
 
-15. Set the following environment variables to be read by Apache HTTP Server. On openSUSE the file to do this in is /usr/lib/systemd/system/apache2.service in the Service block.
+15. Install the database SQL files from the database folder.
+
+16. Set the following environment variables to be read by Apache HTTP Server. On openSUSE the file to do this in is /usr/lib/systemd/system/apache2.service in the Service block.
   - DATABASE_HOST=localhost
 
     Where localhost is the host name of your database server.
@@ -116,9 +120,9 @@ A system that uses third party software to automatically convert audio to text, 
 
     Where bucket-name is the S3 bucket you want to do your AWS processing in. Can be ignored if you are not using AWS.
 
-16. Make sure all the folders you just told the system to use with environment variables exist and are readable and writeable by the user Apache HTTP Server runs as.
+17. Make sure all the folders you just told the system to use with environment variables exist and are readable and writeable by the user Apache HTTP Server runs as.
 
-17. Make sure the following lines are in your PHP configuration file. A sample PHP configuration file is included at setup/php.ini
+18. Make sure the following lines are in your PHP configuration file. A sample PHP configuration file is included at setup/php.ini
     ```
     post_max_size = 3500M
     max_execution_time = 300
@@ -128,7 +132,7 @@ A system that uses third party software to automatically convert audio to text, 
     upload_max_filesize = 35000M
     ```
 
-18. Start or restart Apache HTTP Server so it can load the environment variables.
+19. Start or restart Apache HTTP Server so it can load the environment variables.
 
 **Installation and Set Up of Amazon Transcribe Integration (Optional)**
 
