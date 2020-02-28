@@ -26,7 +26,6 @@ COPY src/* /var/www/html/
 COPY src/images/* /var/www/html/images/
 COPY src/jobs/* /var/www/html/jobs/
 COPY setup/php.ini /usr/local/etc/php
-COPY fix/TranslateClient.php /var/www/html/vendor/stichoza/google-translate-php/src/Stichoza/GoogleTranslate
 RUN mkdir working
 RUN mkdir subtitles
 RUN mkdir renders
