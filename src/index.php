@@ -84,15 +84,17 @@
 			<strong>Media Upload</strong>
 			<div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
 			<br />
-
 			<div id="container">
 				<a id="pickfiles" href="javascript:;">[Select files]</a>
 				<a id="uploadfiles" href="javascript:;">[Upload files]</a>
 			</div>
-
 			<br />
 			<pre id="console"></pre>
-
+			<?php
+			$result2 = mysqli_query($database, "SELECT text FROM settings where name = 'front_page_message'");
+			$front_page_message = mysqli_fetch_array($result2);
+			echo $front_page_message[0];
+			?>
 			<br />
 			<br />
 			<a href="github.php">Code Updates (GitHub Commits)</a> <a href="https://github.com/guardian/language-system/issues">Report a bug</a> <a href="https://github.com/guardian/language-system/issues">Request a feature</a>

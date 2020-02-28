@@ -26,6 +26,7 @@ CREATE TABLE `settings` (
   `id` int(11) NOT NULL,
   `name` varchar(256) DEFAULT NULL,
   `number` int(11) DEFAULT '0',
+  `text` mediumtext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +37,7 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'amazon_transcribe_quota',2000000),(2,'amazon_transcribe_usage',0);
+INSERT INTO `settings` VALUES (1,'amazon_transcribe_quota',2000000,NULL),(2,'amazon_transcribe_usage',0,NULL),(3,'front_page_message',0,'Welcome to the Language System.');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
