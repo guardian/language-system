@@ -27,6 +27,7 @@ CREATE TABLE `settings` (
   `name` varchar(256) DEFAULT NULL,
   `number` int(11) DEFAULT '0',
   `text` mediumtext,
+  `decimal_number` decimal(10,4) DEFAULT '0.0000',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +38,7 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'amazon_transcribe_quota',2000000,NULL),(2,'amazon_transcribe_usage',0,NULL),(3,'front_page_message',0,'Welcome to the Language System.');
+INSERT INTO `settings` VALUES (1,'amazon_transcribe_quota',2000000,NULL,0.0000),(2,'amazon_transcribe_usage',0,NULL,0.0000),(3,'front_page_message',0,'Welcome to the Language System.',0.0000),(4,'amazon_transcribe_usa_dollar_cost',0,NULL,0.0004),(5,'pounds_sterling_per_usa_dollar',1,NULL,0.7800),(6,'euros_per_usa_dollar',1,NULL,0.9000);
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
