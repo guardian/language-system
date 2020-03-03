@@ -193,8 +193,33 @@
 				echo '<input type="submit" value="Transcribe">';
 
 				echo '</form>';
-
-				echo '<br /><br />';
+				$duration = (substr($media[4], 0, 2) * 3600) + (substr($media[4], 3, 2) * 60) + substr($media[4], 6, 2);
+				if (substr($media[4], 9, 2) > 49) {
+					$duration = $duration + 1;
+				}
+				$result5 = mysqli_query($database, "SELECT decimal_number FROM settings where name = 'amazon_transcribe_usa_dollar_cost'");
+				$amazon_transcribe_usa_dollar_cost = mysqli_fetch_array($result5);
+				$result6 = mysqli_query($database, "SELECT decimal_number FROM settings where name = 'pounds_sterling_per_usa_dollar'");
+				$pounds_sterling_per_usa_dollar = mysqli_fetch_array($result6);
+				$result7 = mysqli_query($database, "SELECT decimal_number FROM settings where name = 'euros_per_usa_dollar'");
+				$euros_per_usa_dollar = mysqli_fetch_array($result7);
+				$dollar_cost = 0.01;
+				$dollar_cost_unfixed = round($amazon_transcribe_usa_dollar_cost[0] * $duration,2);
+				if ($dollar_cost_unfixed > 0) {
+					$dollar_cost = $dollar_cost_unfixed;
+				}
+				$pound_cost = 0.01;
+				$pound_cost_unfixed = round($amazon_transcribe_usa_dollar_cost[0] * $duration * $pounds_sterling_per_usa_dollar[0], 2);
+				if ($pound_cost_unfixed > 0) {
+					$pound_cost = $pound_cost_unfixed;
+				}
+				$euro_cost = 0.01;
+				$euro_cost_unfixed = round($amazon_transcribe_usa_dollar_cost[0] * $duration * $euros_per_usa_dollar[0], 2);
+				if ($euro_cost_unfixed > 0) {
+					$euro_cost = $euro_cost_unfixed;
+				}
+				echo 'Cost: $' . $dollar_cost . ' / &pound;' . $pound_cost . ' / &euro;' . $euro_cost;
+				echo '<br /><br /><br /><br />';
 			} else {
 				echo 'Amazon Transcibe is not avalible for this item because the quota would be exceeded.';
 				echo '<br /><br /><br />';
