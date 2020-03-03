@@ -61,11 +61,11 @@
 			echo '</div>';
 
 			echo '<div class="controlbox">';
-			echo '<strong>Machine Transcription</strong><br />';
+			echo '<strong>Machine Transcription</strong><br /><br />';
 
-			echo '<form action="transcribe.php?id='.$_GET['id'].'" method="POST">';
+			echo '<form class="form" action="transcribe.php?id='.$_GET['id'].'" method="POST">';
 
-			echo ' Source Language: <select name="source">';
+			echo 'Source Language: <select name="source">';
 			echo '<option value="en">English</option>';
 			echo '<option value="af">Afrikaans</option>';
 			echo '<option value="sq">Albanian</option>';
@@ -158,12 +158,10 @@
 			echo '<option value="yo">Yoruba</option>';
 			echo '<option value="zu">Zulu</option>';
 			echo '</select>';
-
+			echo '<br /><br />';
 			echo '<input type="submit" value="Transcribe">';
 
 			echo '</form></div>';
-
-			echo '<br /><br />';
 
 			$result2 = mysqli_query($database, "SELECT number FROM settings where name = 'amazon_transcribe_quota'");
 			$amazon_transcribe_quota = mysqli_fetch_array($result2);
@@ -172,11 +170,11 @@
 
 			if ($amazon_transcribe_quota[0] > ($amazon_transcribe_usage[0] + (substr($media[4], 0, 2) * 3600) + (substr($media[4], 3, 2) * 60) + substr($media[4], 6, 2))) {
 				echo '<div class="controlbox">';
-				echo '<strong>Machine Transcription (Amazon)</strong><br />';
+				echo '<strong>Machine Transcription (Amazon)</strong><br /><br />';
 
-				echo '<form action="transcribe_amazon.php?id='.$_GET['id'].'" method="POST">';
+				echo '<form class="form" action="transcribe_amazon.php?id='.$_GET['id'].'" method="POST">';
 
-				echo ' Source Language: <select name="source">';
+				echo 'Source Language: <select name="source">';
 				echo '<option value="en-GB">English (British)</option>';
 				echo '<option value="en-US">English (United States of America)</option>';
 				echo '<option value="en-AU">English (Australian)</option>';
@@ -192,10 +190,7 @@
 				echo '<option value="hi-IN">Hindi</option>';
 				echo '<option value="ko-KR">Korean</option>';
 				echo '</select>';
-
-				echo '<input type="submit" value="Transcribe">';
-
-				echo '</form>';
+				echo '<br /><br />';
 				$duration = (substr($media[4], 0, 2) * 3600) + (substr($media[4], 3, 2) * 60) + substr($media[4], 6, 2);
 				if (substr($media[4], 9, 2) > 49) {
 					$duration = $duration + 1;
@@ -222,6 +217,9 @@
 					$euro_cost = $euro_cost_unfixed;
 				}
 				echo 'Cost: $' . $dollar_cost . ' / &pound;' . $pound_cost . ' / &euro;' . $euro_cost;
+				echo '<br /><br />';
+				echo '<input type="submit" value="Transcribe">';
+				echo '</form>';
 				echo '</div>';
 			} else {
 				echo '<div class="controlbox">';
@@ -229,9 +227,9 @@
 				echo '</div>';
 			}
 			echo '<div class="controlbox">';
-			echo '<strong>Machine Translation</strong><br />';
+			echo '<strong>Machine Translation</strong><br /><br />';
 
-			echo '<form action="translate.php?id='.$_GET['id'].'" method="POST">';
+			echo '<form class="form" action="translate.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="subtitles">';
 			$dir    = 'subtitles/'.$_GET['id'];
 			$files1 = scandir($dir);
@@ -244,7 +242,8 @@
 				}
 			}
 			echo '</select>';
-			echo ' Source: <select name="source">';
+			echo '<br /><br />';
+			echo 'Source: <select name="source">';
 			echo '<option value="en">English</option>';
 			echo '<option value="af">Afrikaans</option>';
 			echo '<option value="sq">Albanian</option>';
@@ -350,8 +349,8 @@
 			echo '<option value="yo">Yoruba</option>';
 			echo '<option value="zu">Zulu</option>';
 			echo '</select>';
-
-			echo ' Target: <select name="target">';
+			echo '<br /><br />';
+			echo 'Target: <select name="target">';
 			echo '<option value="af">Afrikaans</option>';
 			echo '<option value="sq">Albanian</option>';
 			echo '<option value="am">Amharic</option>';
@@ -457,15 +456,15 @@
 			echo '<option value="yo">Yoruba</option>';
 			echo '<option value="zu">Zulu</option>';
 			echo '</select>';
-
+			echo '<br /><br />';
 			echo '<input type="submit" value="Translate">';
 
 			echo '</form></div>';
 
 			echo '<div class="controlbox">';
-			echo '<strong>Machine Speech</strong><br />';
+			echo '<strong>Machine Speech</strong><br /><br />';
 
-			echo '<form action="speech.php?id='.$_GET['id'].'" method="POST">';
+			echo '<form class="form" action="speech.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="subtitles">';
 			$dir    = 'subtitles/'.$_GET['id'];
 			$files1 = scandir($dir);
@@ -478,8 +477,8 @@
 				}
 			}
 			echo '</select>';
-
-			echo ' Language: <select name="language">';
+			echo '<br /><br />';
+			echo 'Language: <select name="language">';
 			echo '<option value="en">English</option>';
 			echo '<option value="en-gb">English (British)</option>';
 			echo '<option value="en-uk-rp">English (Received Pronunciation)</option>';
@@ -549,16 +548,16 @@
 			echo '<option value="vi-sgn">Vietnamese (South)</option>';
 			echo '<option value="cy">Welsh</option>';
 			echo '</select>';
-
-			echo '<input type="submit" name="video" value="Render to Video">';
+			echo '<br /><br />';
+			echo '<input type="submit" name="video" value="Render to Video">&nbsp;&nbsp;&nbsp;';
 			echo '<input type="submit" name="audio" value="Render to Audio">';
 
 			echo '</form></div>';
 
 			echo '<div class="controlbox">';
-			echo '<strong>Machine Speech (Mac OS)</strong><br />';
+			echo '<strong>Machine Speech (macOS)</strong><br /><br />';
 
-			echo '<form action="speechmac.php?id='.$_GET['id'].'" method="POST">';
+			echo '<form class="form" action="speechmac.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="subtitles">';
 			$dir    = 'subtitles/'.$_GET['id'];
 			$files1 = scandir($dir);
@@ -571,8 +570,8 @@
 				}
 			}
 			echo '</select>';
-
-			echo ' Voice: <select name="voice">';
+			echo '<br /><br />';
+			echo 'Voice: <select name="voice">';
 			echo '<option value="Kate">Kate (British English)</option>';
 			echo '<option value="Serena">Serena (British English)</option>';
 			echo '<option value="Daniel">Daniel (British English)</option>';
@@ -602,16 +601,16 @@
 			echo '<option value="Jorge">Jorge (Spanish)</option>';
 			echo '<option value="Monica">Monica (Spanish)</option>';
 			echo '</select>';
-
-			echo '<input type="submit" name="video" value="Render to Video">';
+			echo '<br /><br />';
+			echo '<input type="submit" name="video" value="Render to Video">&nbsp;&nbsp;&nbsp;';
 			echo '<input type="submit" name="audio" value="Render to Audio">';
 
 			echo '</form></div>';
 
 			if ($media[3] == 'v') {
 				echo '<div class="controlbox">';
-				echo '<strong>Subtitle Rendering</strong><br />';
-				echo '<form action="subtitles.php?id='.$_GET['id'].'" method="POST">';
+				echo '<strong>Subtitle Rendering</strong><br /><br />';
+				echo '<form class="form" action="subtitles.php?id='.$_GET['id'].'" method="POST">';
 				echo '<select name="subtitles">';
 				$dir    = 'subtitles/'.$_GET['id'];
 				$files1 = scandir($dir);
@@ -624,21 +623,23 @@
 					}
 				}
 				echo '</select>';
+				echo '<br /><br />';
 				echo '<input type="submit" value="Render">';
 
 				echo '</form></div>';
 			}
 
 			echo '<div class="controlbox">';
-			echo '<strong>Complex Jobs</strong><br />';
+			echo '<strong>Complex Jobs</strong><br /><br />';
 
-			echo '<form action="complex_start.php?id='.$_GET['id'].'" method="POST">';
+			echo '<form class="form" action="complex_start.php?id='.$_GET['id'].'" method="POST">';
 			echo '<select name="job">';
 			$result4 = mysqli_query($database, "SELECT DISTINCT name FROM complex ORDER BY name");
 			while ($row = mysqli_fetch_array($result4, MYSQLI_NUM)) {
 				echo "<option value='".$row[0]."'>".$row[0]."</option>";
 			}
 			echo '</select>';
+			echo '<br /><br />';
 			echo ' Subtitles:<select name="subtitles">';
 			$dir    = 'subtitles/'.$_GET['id'];
 			$files1 = scandir($dir);
@@ -651,14 +652,17 @@
 				}
 			}
 			echo '</select>';
+			echo '<br /><br />';
 			echo '<input type="submit" value="Run">';
 			echo '</form></div>';
 
 			echo '<div class="controlbox">';
-			echo '<strong>Subtitle Upload</strong><br />';
-			echo '<form action="uploadsubtitles.php?id='.$_GET['id'].'" method="post" enctype="multipart/form-data">';
-    		?>Select subtitles to upload:
+			echo '<strong>Subtitle Upload</strong><br /><br />';
+			echo '<form class="form" action="uploadsubtitles.php?id='.$_GET['id'].'" method="post" enctype="multipart/form-data">';
+    		?>Select subtitles:
     			<input type="file" name="fileToUpload" id="fileToUpload">
+					<br />
+					<br />
     			<input type="submit" value="Upload Subtitles" name="submit">
 			</form>
 			<?php
