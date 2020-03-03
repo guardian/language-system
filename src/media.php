@@ -33,8 +33,10 @@
 			#print_r($media);
 			include('navigation.php');
 			echo '<br /><br />';
+			echo '<div class="infobox">';
 			echo 'Media Filename: '.$media[1];
-			echo '<br /><br />';
+			echo '</div>';
+			echo '<div class="previewbox">';
 
 			if (($media[2] == 'mov') || ($media[2] == 'mxf') || ($media[2] == 'MOV') || ($media[2] == 'MXF')) {
 				echo '<img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$_GET['id'].'.png">';
@@ -56,9 +58,9 @@
 				}
 			}
 
-			echo '<br /><br />';
+			echo '</div>';
 
-
+			echo '<div class="controlbox">';
 			echo '<strong>Machine Transcription</strong><br />';
 
 			echo '<form action="transcribe.php?id='.$_GET['id'].'" method="POST">';
@@ -159,7 +161,7 @@
 
 			echo '<input type="submit" value="Transcribe">';
 
-			echo '</form>';
+			echo '</form></div>';
 
 			echo '<br /><br />';
 
@@ -169,6 +171,7 @@
 			$amazon_transcribe_usage = mysqli_fetch_array($result3);
 
 			if ($amazon_transcribe_quota[0] > ($amazon_transcribe_usage[0] + (substr($media[4], 0, 2) * 3600) + (substr($media[4], 3, 2) * 60) + substr($media[4], 6, 2))) {
+				echo '<div class="controlbox">';
 				echo '<strong>Machine Transcription (Amazon)</strong><br />';
 
 				echo '<form action="transcribe_amazon.php?id='.$_GET['id'].'" method="POST">';
@@ -219,12 +222,13 @@
 					$euro_cost = $euro_cost_unfixed;
 				}
 				echo 'Cost: $' . $dollar_cost . ' / &pound;' . $pound_cost . ' / &euro;' . $euro_cost;
-				echo '<br /><br /><br /><br />';
+				echo '</div>';
 			} else {
+				echo '<div class="controlbox">';
 				echo 'Amazon Transcibe is not avalible for this item because the quota would be exceeded.';
-				echo '<br /><br /><br />';
+				echo '</div>';
 			}
-
+			echo '<div class="controlbox">';
 			echo '<strong>Machine Translation</strong><br />';
 
 			echo '<form action="translate.php?id='.$_GET['id'].'" method="POST">';
@@ -456,12 +460,9 @@
 
 			echo '<input type="submit" value="Translate">';
 
-			echo '</form>';
+			echo '</form></div>';
 
-			echo '<br /><br />';
-
-
-
+			echo '<div class="controlbox">';
 			echo '<strong>Machine Speech</strong><br />';
 
 			echo '<form action="speech.php?id='.$_GET['id'].'" method="POST">';
@@ -552,10 +553,9 @@
 			echo '<input type="submit" name="video" value="Render to Video">';
 			echo '<input type="submit" name="audio" value="Render to Audio">';
 
-			echo '</form>';
+			echo '</form></div>';
 
-			echo '<br /><br />';
-
+			echo '<div class="controlbox">';
 			echo '<strong>Machine Speech (Mac OS)</strong><br />';
 
 			echo '<form action="speechmac.php?id='.$_GET['id'].'" method="POST">';
@@ -606,11 +606,10 @@
 			echo '<input type="submit" name="video" value="Render to Video">';
 			echo '<input type="submit" name="audio" value="Render to Audio">';
 
-			echo '</form>';
-
-			echo '<br /><br />';
+			echo '</form></div>';
 
 			if ($media[3] == 'v') {
+				echo '<div class="controlbox">';
 				echo '<strong>Subtitle Rendering</strong><br />';
 				echo '<form action="subtitles.php?id='.$_GET['id'].'" method="POST">';
 				echo '<select name="subtitles">';
@@ -627,10 +626,10 @@
 				echo '</select>';
 				echo '<input type="submit" value="Render">';
 
-				echo '</form>';
-				echo '<br /><br />';
+				echo '</form></div>';
 			}
 
+			echo '<div class="controlbox">';
 			echo '<strong>Complex Jobs</strong><br />';
 
 			echo '<form action="complex_start.php?id='.$_GET['id'].'" method="POST">';
@@ -653,9 +652,9 @@
 			}
 			echo '</select>';
 			echo '<input type="submit" value="Run">';
-			echo '</form>';
-			echo '<br /><br />';
+			echo '</form></div>';
 
+			echo '<div class="controlbox">';
 			echo '<strong>Subtitle Upload</strong><br />';
 			echo '<form action="uploadsubtitles.php?id='.$_GET['id'].'" method="post" enctype="multipart/form-data">';
     		?>Select subtitles to upload:
@@ -663,11 +662,10 @@
     			<input type="submit" value="Upload Subtitles" name="submit">
 			</form>
 			<?php
-			echo '<br /><br />';
-
+			echo '</div>';
 
 			if (file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'])) {
-
+				echo '<div class="outputbox">';
 				echo '<strong>Renders</strong><br />';
 
 				$files = scandir(getenv('LANGUAGE_RENDERS').'/'.$_GET['id']);
@@ -676,11 +674,11 @@
 						echo '<a href="'.getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/'.$file.'">'.$file.'</a><br />';
 					}
 				}
-				echo '<br /><br />';
+				echo '</div>';
 			}
 
 			if (file_exists(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'])) {
-
+				echo '<div class="outputbox">';
 				echo '<strong>Subtitles</strong><br />';
 
 				$files = scandir(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id']);
@@ -691,11 +689,11 @@
 						}
 					}
 				}
-				echo '<br /><br />';
+				echo '</div>';
 			}
 
 			if (file_exists(getenv('LANGUAGE_JSON').'/'.$_GET['id'])) {
-
+				echo '<div class="outputbox">';
 				echo '<strong>Amazon Transcribe Files</strong><br />';
 
 				$files = scandir(getenv('LANGUAGE_JSON').'/'.$_GET['id']);
@@ -706,11 +704,11 @@
 						}
 					}
 				}
-				echo '<br /><br />';
+				echo '</div>';
 			}
 
 			if (file_exists(getenv('LANGUAGE_TEXT').'/'.$_GET['id'])) {
-
+				echo '<div class="outputbox">';
 				echo '<strong>Text Files</strong><br />';
 
 				$files = scandir(getenv('LANGUAGE_TEXT').'/'.$_GET['id']);
@@ -721,7 +719,7 @@
 						}
 					}
 				}
-				echo '<br /><br />';
+				echo '</div>';
 			}
 
 			?>

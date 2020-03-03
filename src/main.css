@@ -53,3 +53,44 @@ a.complex {
   color: #000000;
   text-decoration: none;
 }
+
+div.controlbox {
+  float: left;
+  background: #202020;
+  padding: 12px;
+  margin: 4px;
+  filter: alpha(opacity=92);
+  opacity: 0.92;
+  border-radius: 5px;
+}
+
+div.infobox {
+  float: left;
+  background: #202020;
+  padding: 12px;
+  margin: 4px;
+  filter: alpha(opacity=92);
+  opacity: 0.92;
+  border-radius: 5px;
+}
+
+div.previewbox {
+  clear: left;
+  float: left;
+  background: #202020;
+  padding: 12px;
+  margin: 4px;
+  filter: alpha(opacity=92);
+  opacity: 0.92;
+  border-radius: 5px;
+}
+
+div.outputbox {
+  float: left;
+  background: #202020;
+  padding: 12px;
+  margin: 4px;
+  filter: alpha(opacity=92);
+  opacity: 0.92;
+  border-radius: 5px;
+}
