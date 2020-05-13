@@ -18,6 +18,58 @@
 			$media = mysqli_fetch_array($result);
 
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+				if($_POST['Sub'] == 'Delete') {
+					$sql = "DELETE FROM files WHERE id='".$_GET['id']."'";
+					mysqli_query($database, $sql);
+					if (file_exists(getenv('LANGUAGE_THUMBNAILS').'/'.$_GET['id'].'.png')){
+						unlink(getenv('LANGUAGE_THUMBNAILS').'/'.$_GET['id'].'.png');
+					}
+					if (($_POST['type'] == '2') || ($_POST['type'] == '3')) {
+						if (file_exists(getenv('LANGUAGE_UPLOADS').'/'.$_GET['id'].'/'.$media[1])){
+							unlink(getenv('LANGUAGE_UPLOADS').'/'.$_GET['id'].'/'.$media[1]);
+							rmdir(getenv('LANGUAGE_UPLOADS').'/'.$_GET['id']);
+						}
+					}
+					if ($_POST['type'] == '3') {
+						if (file_exists(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'])){
+							$files = glob(getenv('LANGUAGE_RENDERS').'/'.$_GET['id'].'/*');
+							foreach($files as $file) {
+								if (is_file($file)) {
+									unlink($file);
+								}
+							}
+							rmdir(getenv('LANGUAGE_RENDERS').'/'.$_GET['id']);
+						}
+						if (file_exists(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'])){
+							$files = glob(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id'].'/*');
+							foreach($files as $file) {
+								if (is_file($file)) {
+									unlink($file);
+								}
+							}
+							rmdir(getenv('LANGUAGE_SUBTITLES').'/'.$_GET['id']);
+						}
+						if (file_exists(getenv('LANGUAGE_TEXT').'/'.$_GET['id'])){
+							$files = glob(getenv('LANGUAGE_TEXT').'/'.$_GET['id'].'/*');
+							foreach($files as $file) {
+								if (is_file($file)) {
+									unlink($file);
+								}
+							}
+							rmdir(getenv('LANGUAGE_TEXT').'/'.$_GET['id']);
+						}
+						if (file_exists(getenv('LANGUAGE_JSON').'/'.$_GET['id'])){
+							$files = glob(getenv('LANGUAGE_JSON').'/'.$_GET['id'].'/*');
+							foreach($files as $file) {
+								if (is_file($file)) {
+									unlink($file);
+								}
+							}
+							rmdir(getenv('LANGUAGE_JSON').'/'.$_GET['id']);
+						}
+					}
+					header('Location: index.php');
+				}
 				#echo $_POST['subtitles'];
 
 				#ffmpeg -i video.avi -vf subtitles=subtitle.srt out.avi
@@ -725,6 +777,24 @@
 						}
 					}
 				}
+				echo '</div>';
+			}
+
+			if ($login_session_user_type == 'a') {
+				echo '<div class="controlbox">';
+				echo '<strong>Delete Functions</strong><br /><br />';
+				echo '<form class="form" action="?id='.$_GET['id'].'" method="post">';
+	    		?>
+					<select name="type">
+						<option value="1">Record and thumbnail</option>
+						<option value="2">Record, thumbnail, and media file</option>
+						<option value="3">All data</option>
+					</select>
+					<br />
+					<br />
+	    		<input type="submit" value="Delete" name="Sub">
+				</form>
+				<?php
 				echo '</div>';
 			}
 
