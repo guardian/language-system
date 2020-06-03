@@ -10,13 +10,13 @@
 		<font face="Century Gothic,Avant Garde,Apple Gothic,AppleGothic,URW Gothic L,Avant Garde,Futura,sans-serif" SIZE="-1">
 
 <?php
-include('database.php');
 include('session.php');
 
-$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
-$media = mysqli_fetch_array($result);
-
-exec("php jobs/subtitle_rendering.php ".$login_session." ".$_GET['id']." ".$media[1]." ".$_POST['subtitles']." >&- <&- >/dev/null &");
+if (isset($_POST['video'])) {
+	exec("php jobs/speech_video_mac_text.php ".$login_session." ".$_GET['id']." ".$_POST['voice']." >&- <&- >/dev/null &");
+} else {
+	exec("php jobs/speech_audio_mac_text.php ".$login_session." ".$_GET['id']." ".$_POST['voice']." >&- <&- >/dev/null &");
+}
 
 if ($_GET['type'] == 't') {
 	header("Location: job_info_get.php?id=".$_GET['id']."&type=t");

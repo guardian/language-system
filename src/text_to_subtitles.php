@@ -16,13 +16,9 @@ include('session.php');
 $result = mysqli_query($database, "SELECT id, filename, extension, type FROM files where id = '".$_GET['id']."'");
 $media = mysqli_fetch_array($result);
 
-exec("php jobs/subtitle_rendering.php ".$login_session." ".$_GET['id']." ".$media[1]." ".$_POST['subtitles']." >&- <&- >/dev/null &");
+exec("php jobs/text_to_subtitles.php ".$login_session." ".$_GET['id']." ".$media[1]." >&- <&- >/dev/null &");
 
-if ($_GET['type'] == 't') {
-	header("Location: job_info_get.php?id=".$_GET['id']."&type=t");
-} else {
-	header("Location: job_info_get.php?id=".$_GET['id']);
-}
+header("Location: job_info_get.php?id=".$_GET['id']."&type=t");
 exit;
 ?>
 		</font>

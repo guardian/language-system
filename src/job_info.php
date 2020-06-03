@@ -48,7 +48,11 @@ if ($job[14] != '') {
 }
 
 if (($job[6] == 'Succeeded') || ($job[6] == 'Failed')) {
-	header("Location: media.php?id=".$job[7]);
+	if ($_GET['type'] == 't') {
+		header("Location: text_file.php?id=".$job[7]);
+	} else {
+		header("Location: media.php?id=".$job[7]);
+	}
 	exit;
 }
 ?>

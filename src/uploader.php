@@ -120,6 +120,9 @@ if (!$chunks || $chunk == $chunks - 1) {
 	$mediaFileType = pathinfo($filePath,PATHINFO_EXTENSION);
 
 	$mediaType = 'v';
+  if ($mediaFileType == "txt" || $mediaFileType == "TXT") {
+		$mediaType = 't';
+	}
 	if ($mediaFileType == "wav" || $mediaFileType == "WAV" || $mediaFileType == "mp3" || $mediaFileType == "MP3" || $mediaFileType == "aiff" || $mediaFileType == "AIFF") {
 		$mediaType = 'a';
 	}
@@ -129,7 +132,10 @@ if (!$chunks || $chunk == $chunks - 1) {
 
   rename($filePath, getenv('LANGUAGE_UPLOADS').'/'.$final_name);
 
-	$duration = getDuration(getenv('LANGUAGE_UPLOADS').'/'.$final_name);
+  $duration = '00:00:00.00';
+  if ($mediaType != 't') {
+	   $duration = getDuration(getenv('LANGUAGE_UPLOADS').'/'.$final_name);
+  }
 
 	mysqli_query($database, "INSERT INTO files (filename,extension,type,duration) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."','".$duration."')");
     $lastid = mysqli_insert_id($database);

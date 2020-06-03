@@ -13,7 +13,11 @@ include('session.php');
 
 exec("php jobs/complex.php ".$login_session." ".$_GET['id']." ".$_POST['job']." ".$_POST['subtitles']." >&- <&- >/dev/null &");
 
-header("Location: job_info_get.php?id=".$_GET['id']);
+if ($_GET['type'] == 't') {
+	header("Location: job_info_get.php?id=".$_GET['id']."&type=t");
+} else {
+	header("Location: job_info_get.php?id=".$_GET['id']);
+}
 exit;
 ?>
 		</font>

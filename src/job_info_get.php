@@ -16,7 +16,11 @@ sleep(1);
 $result = mysqli_query($database, "SELECT * FROM jobs where input1 = '".$_GET['id']."' and user = '".$login_session."' ORDER BY id DESC limit 1");
 $job = mysqli_fetch_array($result);
 
-header("Location: job_info.php?id=".$job[0]);
+if ($_GET['type'] == 't') {
+	header("Location: job_info.php?id=".$job[0]."&type=t");
+} else {
+	header("Location: job_info.php?id=".$job[0]);
+}
 exit;
 ?>
 		</font>

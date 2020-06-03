@@ -91,3 +91,29 @@ div.outputbox {
 form.form {
   margin-bottom: 0px;
 }
+
+div.smalltextpreviewbox {
+  float: left;
+  background: #202020;
+  padding: 8px;
+  margin: 0px;
+  width: 340px;
+  height: 184px;
+  font-size: 0.8em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+div.textpreviewbox {
+  float: left;
+  background: #202020;
+  font-size: 0.9em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  clear: left;
+  background: #202020;
+  padding: 12px;
+  margin: 4px;
+  border-radius: 5px;
+}

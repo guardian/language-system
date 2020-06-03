@@ -18,7 +18,11 @@ if (isset($_POST['video'])) {
 	exec("php jobs/speech_audio_mac.php ".$login_session." ".$_GET['id']." ".$_POST['subtitles']." ".$_POST['voice']." >&- <&- >/dev/null &");
 }
 
-header("Location: job_info_get.php?id=".$_GET['id']);
+if ($_GET['type'] == 't') {
+	header("Location: job_info_get.php?id=".$_GET['id']."&type=t");
+} else {
+	header("Location: job_info_get.php?id=".$_GET['id']);
+}
 exit;
 ?>
 		</font>

@@ -52,12 +52,20 @@
 			while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 				#printf("ID: %s  Filename: %s", $row[0], $row[1]);
 				echo '<div class="mediabox">';
-				echo '<a href="media.php?id='.$row[0].'">'.$row[1].'</a>';
+				if ($row[3] == 't') {
+					echo '<a href="text_file.php?id='.$row[0].'">'.$row[1].'</a>';
+				} else {
+					echo '<a href="media.php?id='.$row[0].'">'.$row[1].'</a>';
+				}
 				echo '<br />';
 				if ($row[3] == 'v') {
 					echo '<a href="media.php?id='.$row[0].'"><img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$row[0].'.png"></a>';
 				} elseif (file_exists(getenv('LANGUAGE_THUMBNAILS').'/'.$row[0].'.png')){
 					echo '<a href="media.php?id='.$row[0].'"><img height="200" src="'.getenv('LANGUAGE_THUMBNAILS').'/'.$row[0].'.png"></a>';
+				} elseif ($row[3] == 't') {
+					echo '<a href="text_file.php?id='.$row[0].'">';
+					$loaded_text = nl2br(file_get_contents(getenv('LANGUAGE_UPLOADS').'/'.$row[0].'/'.$row[1], FALSE, NULL, 0, 1024));
+					echo '<div class="smalltextpreviewbox">'.$loaded_text.'</div></a>';
 				} else {
 					echo '<a href="media.php?id='.$row[0].'"><img height="200" src="images/audio.png"></a>';
 				}
@@ -81,7 +89,7 @@
 			<br clear="all" />
 			<br />
 			<br />
-			<strong>Media Upload</strong>
+			<strong>Media and Text Upload</strong>
 			<div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
 			<br />
 			<div id="container">
@@ -115,7 +123,8 @@
 				max_file_size : '50000mb',
 				mime_types: [
 					{title : "Video files", extensions : "mov,mp4,mxf,mpg"},
-					{title : "Audio files", extensions : "aiff,mp3,wav"}
+					{title : "Audio files", extensions : "aiff,mp3,wav"},
+					{title : "Text files", extensions : "txt"}
 				]
 			},
 
