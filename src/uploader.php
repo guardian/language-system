@@ -145,14 +145,20 @@ if (!$chunks || $chunk == $chunks - 1) {
         exec(getenv('LANGUAGE_FFMPEG').' -i '.$targetDir.'/'.$lastid.'/'.$final_name.' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');
     }
     if ($mediaType == 'a') {
-      exec('php /opt/justwave/justwave.cli.php '.$targetDir.'/'.$lastid.'/'.$final_name.' width=356 height=200 wave_color=#FFFFFF back_color=#222222');
+      exec('php /opt/justwave/justwave.cli.php '.$targetDir.'/'.$lastid.'/'.$final_name.' width=357 height=200 wave_color=#FFFFFF back_color=#222222');
       $likely_file_name = str_replace($mediaFileType,"png",$final_name);
       $micro_seconds_current = 0;
       while((!file_exists('waves/'.$likely_file_name)) && ($micro_seconds_current < 120000000)) {
         usleep(200000);
         $micro_seconds_current = $micro_seconds_current + 200000;
       }
-      rename('waves/'.$likely_file_name, getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');
+      rename('waves/'.$likely_file_name, getenv('LANGUAGE_WORKING').'/'.$likely_file_name);
+      $im = imagecreatefrompng(getenv('LANGUAGE_WORKING').'/'.$likely_file_name);
+      $im2 = imagecrop($im, ['x' => 1, 'y' => 0, 'width' => 356, 'height' => 200]);
+      imagepng($im2, getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');
+      imagedestroy($im2);
+      imagedestroy($im);
+      unlink(getenv('LANGUAGE_WORKING').'/'.$likely_file_name);
     }
 }
 
