@@ -1,5 +1,7 @@
 # The Multi-Language Automatic Translation, Subtitling, and Voice Rendering System
 
+![LanguageSystemIndex](https://user-images.githubusercontent.com/10620802/83774609-d2718800-a67d-11ea-9f3d-625b5c70cc60.jpg)
+
 A system that uses third party software to automatically convert audio to text, translate text, render text to video, and render text to audio.
 
 **Requirements**
