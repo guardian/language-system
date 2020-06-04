@@ -2,6 +2,8 @@
 
 ![LanguageSystemIndex](https://user-images.githubusercontent.com/10620802/83774609-d2718800-a67d-11ea-9f3d-625b5c70cc60.jpg)
 
+![LanguageSystemMedia](https://user-images.githubusercontent.com/10620802/83776248-dc948600-a67f-11ea-835a-cc4bb10c1362.jpg)
+
 A system that uses third party software to automatically convert audio to text, translate text, render text to video, and render text to audio.
 
 **Requirements**
