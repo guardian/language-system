@@ -36,7 +36,11 @@
 				}
 			}
 
-			$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files ORDER BY id DESC LIMIT 16 OFFSET ".$page_offset);
+			if ($login_session_user_type == 'a') {
+				$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files ORDER BY id DESC LIMIT 16 OFFSET ".$page_offset);
+			} else {
+				$result = mysqli_query($database, "SELECT id, filename, extension, type FROM files WHERE owner='".$login_session_user_id."' OR private='0' ORDER BY id DESC LIMIT 16 OFFSET ".$page_offset);
+			}
 
 			if (isset($_GET['p'])) {
 				if ($_GET['p'] != '1') {

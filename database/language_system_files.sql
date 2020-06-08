@@ -28,6 +28,8 @@ CREATE TABLE `files` (
   `extension` varchar(16) DEFAULT NULL,
   `type` varchar(32) DEFAULT NULL,
   `duration` varchar(12) DEFAULT NULL,
+  `owner` int(11) DEFAULT NULL,
+  `private` int(1) DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

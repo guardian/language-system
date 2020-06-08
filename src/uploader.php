@@ -1,5 +1,6 @@
 <?php
 include 'database.php';
+include('session.php');
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -137,7 +138,7 @@ if (!$chunks || $chunk == $chunks - 1) {
 	   $duration = getDuration(getenv('LANGUAGE_UPLOADS').'/'.$final_name);
   }
 
-	mysqli_query($database, "INSERT INTO files (filename,extension,type,duration) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."','".$duration."')");
+	mysqli_query($database, "INSERT INTO files (filename,extension,type,duration,owner) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."','".$duration."','".$login_session_user_id."')");
     $lastid = mysqli_insert_id($database);
     mkdir($targetDir.'/'.$lastid);
     rename($targetDir.'/'.$final_name, $targetDir.'/'.$lastid.'/'.$final_name);
