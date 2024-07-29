@@ -20,7 +20,7 @@ chmod(getenv('LANGUAGE_TEXT').'/'.$input1, 0777);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Stichoza\GoogleTranslate\TranslateClient;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 $fh = fopen(getenv('LANGUAGE_UPLOADS').'/'.$input1.'/'.$input2,'r');
 $data_to_write = '';
@@ -28,7 +28,7 @@ $data_to_write = '';
 $line_counter = 0;
 while ($line = fgets($fh)) {
   $line_counter++;
-  $data_to_write .= TranslateClient::translate($input3, $input4, $line);
+  $data_to_write .= GoogleTranslate::trans($line, $input4, $input3);
   $data_to_write .= "\n";
 }
 fclose($fh);

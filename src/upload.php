@@ -38,8 +38,8 @@ if ($uploadOk == 0) {
 
         rename(getenv('LANGUAGE_UPLOADS').'/'.$_FILES["fileToUpload"]["name"], getenv('LANGUAGE_UPLOADS').'/'.$final_name);
 
-        mysql_query("INSERT INTO files (filename,extension,type) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."')");
-        $lastid = mysql_insert_id();
+        mysqli_query($database, "INSERT INTO files (filename,extension,type) VALUES ('".$final_name."','".$mediaFileType."','".$mediaType."')");
+        $lastid = mysqli_insert_id();
         if ($mediaType == 'v') {
         	exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$final_name.' -ss 00:00:05.000 -vf scale=-1:200 -vframes 1 '.getenv('LANGUAGE_THUMBNAILS').'/'.$lastid.'.png');
         }

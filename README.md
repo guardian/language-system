@@ -13,12 +13,13 @@ A system that uses third party software to automatically convert audio to text, 
 - [PHP](https://php.net/)
 - [MySQL Server](https://www.mysql.com/)
 - [FFmpeg](https://ffmpeg.org/)
+- [pipx](https://pipx.pypa.io/)
 - [Autosub](https://github.com/agermanidis/autosub)
 - [eSpeak](http://espeak.sourceforge.net/)
 - [Composer](https://getcomposer.org/)
 - [Google Translate PHP](https://github.com/Stichoza/google-translate-php)
 - [Plupload](https://www.plupload.com/)
-- [JustWave](https://justwave.beotiger.com/)
+- [JustWave](https://github.com/beotiger/justwave)
 - A World Wide Web browser
 
 **Requirements for Optional Elements**
@@ -49,29 +50,32 @@ A system that uses third party software to automatically convert audio to text, 
 
 5. Install [FFmpeg](https://ffmpeg.org/).
 
-6. Install [Autosub](https://github.com/agermanidis/autosub).
-  - Run `pip install autosub`
+6. Install [pipx](https://pipx.pypa.io/).
 
-7. Install [eSpeak](http://espeak.sourceforge.net/).
+7. Install [Autosub](https://github.com/agermanidis/autosub).
+  - Run `python3 -m venv /opt/venv`
+  - Run `/opt/venv/bin/pip install git+https://github.com/agermanidis/autosub.git`
 
-8. Install [Composer](https://getcomposer.org/download/).
+8. Install [eSpeak](http://espeak.sourceforge.net/).
 
-9. Install [Google Translate PHP](https://github.com/Stichoza/google-translate-php).
+9. Install [Composer](https://getcomposer.org/download/).
 
-10. Install [Plupload](https://www.plupload.com/).
+10. Install [Google Translate PHP](https://github.com/Stichoza/google-translate-php).
 
-11. Install [JustWave](https://justwave.beotiger.com/).
+11. Install [Plupload](https://www.plupload.com/).
+
+12. Install [JustWave](https://github.com/beotiger/justwave).
   - Run `cd /opt` then `git clone https://github.com/beotiger/justwave.git`
 
-12. Clone the Git repository of Language System to a folder that is served by Apache HTTP Server.
+13. Clone the Git repository of Language System to a folder that is served by Apache HTTP Server.
 
-13. Create a MySQL user for Language System to use.
+14. Create a MySQL user for Language System to use.
 
-14. Create a MySQL schema called 'language_system' and give the user you just made full access to it.
+15. Create a MySQL schema called 'language_system' and give the user you just made full access to it.
 
-15. Install the database SQL files from the database folder.
+16. Install the database SQL files from the database folder.
 
-16. Set the following environment variables to be read by Apache HTTP Server. On openSUSE the file to do this in is /usr/lib/systemd/system/apache2.service in the Service block.
+17. Set the following environment variables to be read by Apache HTTP Server. On openSUSE the file to do this in is /usr/lib/systemd/system/apache2.service in the Service block.
   - DATABASE_HOST=localhost
 
     Where localhost is the host name of your database server.
@@ -124,9 +128,9 @@ A system that uses third party software to automatically convert audio to text, 
 
     Where bucket-name is the S3 bucket you want to do your AWS processing in. Can be ignored if you are not using AWS.
 
-17. Make sure all the folders you just told the system to use with environment variables exist and are readable and writeable by the user Apache HTTP Server runs as.
+18. Make sure all the folders you just told the system to use with environment variables exist and are readable and writeable by the user Apache HTTP Server runs as.
 
-18. Make sure the following lines are in your PHP configuration file. A sample PHP configuration file is included at setup/php.ini
+19. Make sure the following lines are in your PHP configuration file. A sample PHP configuration file is included at setup/php.ini
     ```
     post_max_size = 3500M
     max_execution_time = 300
@@ -136,7 +140,7 @@ A system that uses third party software to automatically convert audio to text, 
     upload_max_filesize = 35000M
     ```
 
-19. Start or restart Apache HTTP Server so it can load the environment variables.
+20. Start or restart Apache HTTP Server so it can load the environment variables.
 
 **Installation and Set Up of Amazon Transcribe Integration (Optional)**
 
@@ -170,7 +174,7 @@ For this you will need a machine running macOS.
 
 4. Click on the System Voice menu and select Customize.
 
-5. Install one or more of the following voices: Kate, Serena, Daniel, Fiona, Moira, Veena, Karen, Tessa, Allison, Ava, Samantha, Susan, Ting-Ting, Sin-ja, Mei-Jia, Audrey, Aurelie, Anna, Markus, Petra, Yannick, Lekha, Kyoko, Otoya, Katya, Milena, Jorge, and Monica.
+5. Install one or more of the following voices: Kate, Serena, Daniel, Fiona, Moira, Veena, Karen, Tessa, Allison, Ava, Samantha, Susan, Ting-Ting, Sin-ja, Mei-Jia, Audrey, Aurelie, Markus, Petra, Yannick, Lekha, Kyoko, Otoya, Katya, Milena, Jorge, and Monica.
 
 6. Make sure your Language System working folder is shared with the machine running macOS.
 

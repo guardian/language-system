@@ -45,7 +45,7 @@ $amazon_transcribe_quota = mysqli_fetch_array($result2);
 $result3 = mysqli_query($database, "SELECT number FROM settings where name = 'amazon_transcribe_usage'");
 $amazon_transcribe_usage = mysqli_fetch_array($result3);
 
-if ($amazon_transcribe_quota[0] > ($amazon_transcribe_usage[0] + (substr($media[4], 0, 2) * 3600) + (substr($media[4], 3, 2) * 60) + substr($media[4], 6, 2))) {
+if ($amazon_transcribe_quota[0] > ($amazon_transcribe_usage[0] + (substr($media[2], 0, 2) * 3600) + (substr($media[2], 3, 2) * 60) + substr($media[2], 6, 2))) {
   exec(getenv('LANGUAGE_FFMPEG').' -i '.getenv('LANGUAGE_UPLOADS').'/'.$input1.'/'.$media[1].' -vn -sn -c:a mp3 -ab 192k '.getenv('LANGUAGE_WORKING').'/'.$media[1].'.mp3');
 
   mkdir(getenv('LANGUAGE_SUBTITLES').'/'.$input1);

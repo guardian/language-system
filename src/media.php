@@ -648,11 +648,11 @@
 					echo '<option value="Ava">Ava (United States of America English)</option>';
 					echo '<option value="Samantha">Samantha (United States of America English)</option>';
 					echo '<option value="Susan">Susan (United States of America English)</option>';
-					echo '<option value="Ting-Ting">Ting-Ting (Chinese)</option>';
-					echo '<option value="Sin-ji">Sin-ja (Hong Kong Chinese)</option>';
-					echo '<option value="Mei-Jia">Mei-Jia (Taiwanese Chinese)</option>';
+					echo '<option value="Tingting">Ting-Ting (Chinese)</option>';
+					echo '<option value="Sinji">Sin-ja (Hong Kong Chinese)</option>';
+					echo '<option value="Meijia">Mei-Jia (Taiwanese Chinese)</option>';
 					echo '<option value="Audrey">Audrey (French)</option>';
-					echo '<option value="Aurelie">Aurelie (French)</option>';
+					echo '<option value="Aurélie">Aurelie (French)</option>';
 					echo '<option value="Anna">Anna (German)</option>';
 					echo '<option value="Markus">Markus (German)</option>';
 					echo '<option value="Petra">Petra (German)</option>';
@@ -663,7 +663,7 @@
 					echo '<option value="Katya">Katya (Russian)</option>';
 					echo '<option value="Milena">Milena (Russian)</option>';
 					echo '<option value="Jorge">Jorge (Spanish)</option>';
-					echo '<option value="Monica">Monica (Spanish)</option>';
+					echo '<option value="Mónica">Monica (Spanish)</option>';
 					echo '</select>';
 					echo '<br /><br />';
 					echo '<input type="submit" name="video" value="Render to Video">&nbsp;&nbsp;&nbsp;';

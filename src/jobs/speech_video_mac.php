@@ -79,7 +79,7 @@ $myvoicefile = file_put_contents(getenv('LANGUAGE_WORKING').'/speech_settings/vo
 sleep(1);
 $myfile = file_put_contents(getenv('LANGUAGE_WORKING').'/speech_in/'.$new_job.'.txt', $data_to_write.PHP_EOL , FILE_APPEND | LOCK_EX);
 
-$seconds_to_wait = $line_counter * 4000000;
+$seconds_to_wait = $line_counter * 6000000;
 
 usleep($seconds_to_wait);
 

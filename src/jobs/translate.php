@@ -17,7 +17,7 @@ update_job($new_job,'Running');
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Stichoza\GoogleTranslate\TranslateClient;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 $fh = fopen(getenv('LANGUAGE_SUBTITLES').'/'.$input1.'/'.$input2,'r');
 $data_to_write = '';
@@ -31,7 +31,7 @@ while ($line = fgets($fh)) {
 			$data_to_write .= $line;
 		} else {
   			#echo($line);
-  			$data_to_write .= TranslateClient::translate($input3, $input4, $line);
+  			$data_to_write .= GoogleTranslate::trans($line, $input4, $input3);
   			$data_to_write .= "\n";
   			#echo '<br />';
   		}
